@@ -1,17 +1,17 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { CodeExample } from "../components/code-example";
+import { CodeExample } from "../components/examples/shared/code-example";
 import {
   suspenseReactQueryCode,
   suspenseVanillaCode,
   suspenseAngularCode,
 } from "../components/code-for-examples";
-import { SuspenseReactQueryExample } from "../components/SuspenseReactQueryExample";
+import { SuspenseReactQueryExample } from "../components/examples/suspense/SuspenseReactQueryExample";
 import { api, Post, User } from "../api/mock-api";
 import {
   angularComponentCode,
   angularTemplateCode,
-} from "../components/suspense-angular";
+} from "../components/examples/suspense/suspense-angular";
 
 export const Route = createFileRoute("/examples/suspense")({
   component: SuspenseExample,
@@ -33,24 +33,42 @@ function SuspenseExample(): React.ReactElement {
         </p>
       </header>
 
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">
+          useSuspenseQuery and React Suspense
+        </h2>
+        <div className="bg-indigo-50 dark:bg-indigo-900/20 border-l-4 border-indigo-500 p-4 mb-4">
+          <h3 className="font-medium text-indigo-800 dark:text-indigo-200 mb-2">
+            Why is this useful?
+          </h3>
+          <p className="text-indigo-700 dark:text-indigo-300 text-sm">
+            React Suspense with useSuspenseQuery provides a more declarative
+            approach to handling loading states. Instead of manually checking
+            loading states in each component, you can use Suspense boundaries to
+            handle loading UI at a higher level. This leads to cleaner component
+            code and better separation of concerns.
+          </p>
+        </div>
+      </section>
+
       <CodeExample
         title="Suspense with React Query"
         code={[
           {
             name: "React Query",
             code: suspenseReactQueryCode,
-            language: "typescript"
+            language: "typescript",
           },
           {
             name: "Vanilla React",
             code: suspenseVanillaCode,
-            language: "typescript"
+            language: "typescript",
           },
           {
             name: "Angular",
             code: suspenseAngularCode,
-            language: "typescript"
-          }
+            language: "typescript",
+          },
         ]}
       >
         <SuspenseReactQueryExample />

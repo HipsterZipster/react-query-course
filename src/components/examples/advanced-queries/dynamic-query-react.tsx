@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { api } from '../api/mock-api'
+import { api } from '../../../api/mock-api'
 
 export function DynamicQueryReact(): React.ReactElement {
   const [userId, setUserId] = React.useState<number>(1)

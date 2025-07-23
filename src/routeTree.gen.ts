@@ -14,6 +14,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ExamplesRouteImport } from './routes/examples'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExamplesSuspenseRouteImport } from './routes/examples.suspense'
+import { Route as ExamplesMutationsRouteImport } from './routes/examples.mutations'
 import { Route as ExamplesIntroductionRouteImport } from './routes/examples.introduction'
 import { Route as ExamplesGettingStartedRouteImport } from './routes/examples.getting-started'
 import { Route as ExamplesConclusionRouteImport } from './routes/examples.conclusion'
@@ -37,6 +38,11 @@ const IndexRoute = IndexRouteImport.update({
 const ExamplesSuspenseRoute = ExamplesSuspenseRouteImport.update({
   id: '/suspense',
   path: '/suspense',
+  getParentRoute: () => ExamplesRoute,
+} as any)
+const ExamplesMutationsRoute = ExamplesMutationsRouteImport.update({
+  id: '/mutations',
+  path: '/mutations',
   getParentRoute: () => ExamplesRoute,
 } as any)
 const ExamplesIntroductionRoute = ExamplesIntroductionRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/examples/conclusion': typeof ExamplesConclusionRoute
   '/examples/getting-started': typeof ExamplesGettingStartedRoute
   '/examples/introduction': typeof ExamplesIntroductionRoute
+  '/examples/mutations': typeof ExamplesMutationsRoute
   '/examples/suspense': typeof ExamplesSuspenseRoute
 }
 export interface FileRoutesByTo {
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/examples/conclusion': typeof ExamplesConclusionRoute
   '/examples/getting-started': typeof ExamplesGettingStartedRoute
   '/examples/introduction': typeof ExamplesIntroductionRoute
+  '/examples/mutations': typeof ExamplesMutationsRoute
   '/examples/suspense': typeof ExamplesSuspenseRoute
 }
 export interface FileRoutesById {
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/examples/conclusion': typeof ExamplesConclusionRoute
   '/examples/getting-started': typeof ExamplesGettingStartedRoute
   '/examples/introduction': typeof ExamplesIntroductionRoute
+  '/examples/mutations': typeof ExamplesMutationsRoute
   '/examples/suspense': typeof ExamplesSuspenseRoute
 }
 export interface FileRouteTypes {
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/examples/conclusion'
     | '/examples/getting-started'
     | '/examples/introduction'
+    | '/examples/mutations'
     | '/examples/suspense'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/examples/conclusion'
     | '/examples/getting-started'
     | '/examples/introduction'
+    | '/examples/mutations'
     | '/examples/suspense'
   id:
     | '__root__'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/examples/conclusion'
     | '/examples/getting-started'
     | '/examples/introduction'
+    | '/examples/mutations'
     | '/examples/suspense'
   fileRoutesById: FileRoutesById
 }
@@ -189,6 +201,13 @@ declare module '@tanstack/react-router' {
       path: '/suspense'
       fullPath: '/examples/suspense'
       preLoaderRoute: typeof ExamplesSuspenseRouteImport
+      parentRoute: typeof ExamplesRoute
+    }
+    '/examples/mutations': {
+      id: '/examples/mutations'
+      path: '/mutations'
+      fullPath: '/examples/mutations'
+      preLoaderRoute: typeof ExamplesMutationsRouteImport
       parentRoute: typeof ExamplesRoute
     }
     '/examples/introduction': {
@@ -253,6 +272,7 @@ interface ExamplesRouteChildren {
   ExamplesConclusionRoute: typeof ExamplesConclusionRoute
   ExamplesGettingStartedRoute: typeof ExamplesGettingStartedRoute
   ExamplesIntroductionRoute: typeof ExamplesIntroductionRoute
+  ExamplesMutationsRoute: typeof ExamplesMutationsRoute
   ExamplesSuspenseRoute: typeof ExamplesSuspenseRoute
 }
 
@@ -262,6 +282,7 @@ const ExamplesRouteChildren: ExamplesRouteChildren = {
   ExamplesConclusionRoute: ExamplesConclusionRoute,
   ExamplesGettingStartedRoute: ExamplesGettingStartedRoute,
   ExamplesIntroductionRoute: ExamplesIntroductionRoute,
+  ExamplesMutationsRoute: ExamplesMutationsRoute,
   ExamplesSuspenseRoute: ExamplesSuspenseRoute,
 }
 

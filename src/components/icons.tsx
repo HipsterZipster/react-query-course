@@ -1,11 +1,24 @@
 import React from "react";
 
+/**
+ * Common props interface for all icon components
+ * @interface IconProps
+ */
 interface IconProps {
+  /** Icon width in pixels (default: varies by icon) */
   width?: number;
+  /** Icon height in pixels (default: varies by icon) */
   height?: number;
+  /** Additional CSS classes to apply to the icon */
   className?: string;
 }
 
+/**
+ * Eye icon - represents visibility/show state
+ * Used to indicate when content is visible or to show hidden content
+ * @param props - Icon properties
+ * @returns JSX element for the eye icon
+ */
 export const EyeIcon: React.FC<IconProps> = ({
   width = 20,
   height = 20,
@@ -27,6 +40,12 @@ export const EyeIcon: React.FC<IconProps> = ({
   </svg>
 );
 
+/**
+ * Eye slash icon - represents hidden/invisible state
+ * Used to indicate when content is hidden or to hide visible content
+ * @param props - Icon properties
+ * @returns JSX element for the eye slash icon
+ */
 export const EyeSlashIcon: React.FC<IconProps> = ({
   width = 20,
   height = 20,
@@ -48,6 +67,12 @@ export const EyeSlashIcon: React.FC<IconProps> = ({
   </svg>
 );
 
+/**
+ * Code brackets icon - represents code/programming content
+ * Used to indicate code sections or toggle code visibility
+ * @param props - Icon properties
+ * @returns JSX element for the code brackets icon
+ */
 export const CodeIcon: React.FC<IconProps> = ({
   width = 20,
   height = 20,
@@ -69,6 +94,12 @@ export const CodeIcon: React.FC<IconProps> = ({
   </svg>
 );
 
+/**
+ * Play icon - represents live examples or interactive content
+ * Used to indicate executable/runnable examples
+ * @param props - Icon properties (default size: 16x16)
+ * @returns JSX element for the play icon
+ */
 export const PlayIcon: React.FC<IconProps> = ({
   width = 16,
   height = 16,
@@ -90,48 +121,14 @@ export const PlayIcon: React.FC<IconProps> = ({
   </svg>
 );
 
-export const ExpandIcon: React.FC<IconProps> = ({
-  width = 20,
-  height = 20,
-  className = "",
-}) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={width}
-    height={height}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
-  </svg>
-);
 
-export const CompressIcon: React.FC<IconProps> = ({
-  width = 20,
-  height = 20,
-  className = "",
-}) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={width}
-    height={height}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 0-2-2h-3M3 16h3a2 2 0 0 0 2-2v-3" />
-  </svg>
-);
 
+/**
+ * Fullscreen icon - YouTube-style enter fullscreen icon
+ * Corner brackets expanding outward to indicate entering fullscreen mode
+ * @param props - Icon properties
+ * @returns JSX element for the fullscreen icon
+ */
 export const FullScreenIcon: React.FC<IconProps> = ({
   width = 20,
   height = 20,
@@ -153,6 +150,12 @@ export const FullScreenIcon: React.FC<IconProps> = ({
   </svg>
 );
 
+/**
+ * Exit fullscreen icon - YouTube-style exit fullscreen icon
+ * Corner brackets contracting inward to indicate exiting fullscreen mode
+ * @param props - Icon properties
+ * @returns JSX element for the exit fullscreen icon
+ */
 export const ExitFullScreenIcon: React.FC<IconProps> = ({
   width = 20,
   height = 20,
@@ -174,6 +177,12 @@ export const ExitFullScreenIcon: React.FC<IconProps> = ({
   </svg>
 );
 
+/**
+ * Collapse content icon - Material Design collapse/minimize icon
+ * Used to indicate content can be collapsed or minimized
+ * @param props - Icon properties
+ * @returns JSX element for the collapse content icon
+ */
 export const CollapseContentIcon: React.FC<IconProps> = ({
   width = 20,
   height = 20,
@@ -191,6 +200,12 @@ export const CollapseContentIcon: React.FC<IconProps> = ({
   </svg>
 );
 
+/**
+ * Expand content icon - Material Design expand/maximize icon
+ * Used to indicate content can be expanded or maximized
+ * @param props - Icon properties
+ * @returns JSX element for the expand content icon
+ */
 export const ExpandContentIcon: React.FC<IconProps> = ({
   width = 20,
   height = 20,

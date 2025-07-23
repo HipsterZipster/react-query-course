@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Suspense } from 'react'
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
-import { api, Post } from '../api/mock-api'
+import { api, Post } from '../../../api/mock-api'
 
 /**
  * Traditional Posts component using useQuery

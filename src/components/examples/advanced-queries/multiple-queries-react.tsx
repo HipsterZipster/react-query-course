@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useQueries, useQuery } from '@tanstack/react-query'
-import { api } from '../api/mock-api'
+import { api } from '../../../api/mock-api'
 
 export function MultipleQueriesReact(): React.ReactElement {
   const [authorId, setAuthorId] = React.useState<number>(1)

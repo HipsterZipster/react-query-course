@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { api, Post, User } from '../api/mock-api'
+import { api, Post, User } from '../../../api/mock-api'
 
 export function MultipleQueriesVanilla(): React.ReactElement {
   // Dependent queries state

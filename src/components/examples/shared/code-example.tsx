@@ -1,14 +1,11 @@
 import React from "react";
 import {
-  CodeIcon,
   PlayIcon,
-  // ExpandIcon,
-  // CompressIcon,
   CollapseContentIcon,
   ExpandContentIcon,
   FullScreenIcon,
   ExitFullScreenIcon,
-} from "./icons";
+} from "../../icons";
 
 interface CodeFile {
   readonly name: string;

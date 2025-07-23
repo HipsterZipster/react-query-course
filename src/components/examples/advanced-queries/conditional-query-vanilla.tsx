@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { api, User } from '../api/mock-api'
+import { api, User } from '../../../api/mock-api'
 
 export function ConditionalQueryVanilla(): React.ReactElement {
   const [isEnabled, setIsEnabled] = React.useState<boolean>(false)

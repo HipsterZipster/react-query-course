@@ -2,7 +2,7 @@ import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { api, User, useErrorToggle } from "~/api/mock-api";
-import { CodeExample } from "~/components/code-example";
+import { CodeExample } from "~/components/examples/shared/code-example";
 import {
   userListAngularCode,
   userListReactQueryCode,
@@ -31,49 +31,71 @@ function BasicQueryExample(): React.ReactElement {
         </p>
       </header>
 
-      <section className="bg-white p-6 border rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">Core Concepts</h2>
-
-        <div className="space-y-4 mb-6">
-          <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
-            <h3 className="font-medium">queryKey</h3>
-            <p className="text-sm text-gray-700">
-              A unique identifier for your data. Similar to a primary key in a
-              database or a key in a HashMap.
-            </p>
-            <p className="mt-1 text-xs bg-blue-100 p-2 rounded">
-              <strong>Analogy:</strong> Like a unique identifier in a Java Map
-              or database primary key.
-            </p>
-          </div>
-
-          <div className="p-4 border-l-4 border-green-500 bg-green-50">
-            <h3 className="font-medium">queryFn</h3>
-            <p className="text-sm text-gray-700">
-              The asynchronous function that fetches your data (e.g., using
-              fetch or axios).
-            </p>
-            <p className="mt-1 text-xs bg-green-100 p-2 rounded">
-              <strong>Analogy:</strong> This is like your DAO or Repository
-              method that retrieves data from a database.
-            </p>
-          </div>
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">The useQuery Hook</h2>
+        <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 mb-4">
+          <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">
+            Why is this useful?
+          </h3>
+          <p className="text-blue-700 dark:text-blue-300 text-sm">
+            The useQuery hook eliminates the boilerplate code needed for data
+            fetching in React. It automatically handles loading states, error
+            handling, caching, and background refetching. This means less code
+            to write and maintain, while getting better user experience out of
+            the box.
+          </p>
         </div>
+      </section>
 
-        <div className="mb-4">
-          <h3 className="text-lg font-medium mb-2">Basic useQuery Example</h3>
+      {/* 2-Column Layout: Core Concepts + Basic Example */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        {/* Left Column: Core Concepts */}
+        <section className="bg-white p-6 border rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">Core Concepts</h2>
+
+          <div className="space-y-4">
+            <div className="p-4 border-l-4 border-blue-500 bg-blue-50">
+              <h3 className="font-medium">queryKey</h3>
+              <p className="text-sm text-gray-700">
+                A unique identifier for your data. Similar to a primary key in a
+                database or a key in a HashMap.
+              </p>
+              <p className="mt-1 text-xs bg-blue-100 p-2 rounded">
+                <strong>Analogy:</strong> Like a unique identifier in a Java Map
+                or database primary key.
+              </p>
+            </div>
+
+            <div className="p-4 border-l-4 border-green-500 bg-green-50">
+              <h3 className="font-medium">queryFn</h3>
+              <p className="text-sm text-gray-700">
+                The asynchronous function that fetches your data (e.g., using
+                fetch or axios).
+              </p>
+              <p className="mt-1 text-xs bg-green-100 p-2 rounded">
+                <strong>Analogy:</strong> This is like your DAO or Repository
+                method that retrieves data from a database.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Right Column: Basic Example */}
+        <section className="bg-white p-6 border rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">Basic useQuery Example</h2>
           <div className="overflow-x-auto">
-            <pre className="bg-gray-800 text-white p-4 rounded w-full">
+            <pre className="bg-gray-800 text-white p-4 rounded w-full text-sm">
               <code>{`const { data, isPending, isError, error } = useQuery({
   queryKey: ['users'],
   queryFn: fetchUsers
 })`}</code>
             </pre>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <section className="bg-white p-6 border rounded-lg">
+      {/* Full Width Row: Live Example */}
+      <section className="bg-white p-6 border rounded-lg mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Live Example: User List</h2>
           <button

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { api, Post } from '../api/mock-api'
+import { api, Post } from '../../../api/mock-api'
 
 export function SuspenseVanilla(): React.ReactElement {
   const [posts, setPosts] = React.useState<Post[]>([])

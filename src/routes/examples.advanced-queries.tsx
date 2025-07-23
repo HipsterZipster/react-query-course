@@ -1,21 +1,41 @@
-import * as React from 'react'
-import { createFileRoute } from '@tanstack/react-router'
-import { useQuery, useQueries } from '@tanstack/react-query'
-import { api, Post, User, useErrorToggle } from '../api/mock-api'
-import { DynamicQueryVanilla } from '../components/dynamic-query-vanilla'
-import { angularComponentCode as dynamicAngularComponent, angularTemplateCode as dynamicAngularTemplate } from '../components/dynamic-query-angular'
-import { DynamicQueryReact } from '../components/dynamic-query-react'
-import { ConditionalQueryVanilla } from '../components/conditional-query-vanilla'
-import { angularComponentCode as conditionalAngularComponent, angularTemplateCode as conditionalAngularTemplate } from '../components/conditional-query-angular'
-import { ConditionalQueryReact } from '../components/conditional-query-react'
-import { MultipleQueriesVanilla } from '../components/multiple-queries-vanilla'
-import { angularComponentCode as multipleAngularComponent, angularTemplateCode as multipleAngularTemplate } from '../components/multiple-queries-angular'
-import { MultipleQueriesReact } from '../components/multiple-queries-react'
-import { CodeExample } from '../components/code-example'
+import * as React from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useQuery, useQueries } from "@tanstack/react-query";
+import { api, Post, User, useErrorToggle } from "../api/mock-api";
+import { DynamicQueryVanilla } from "../components/examples/advanced-queries/dynamic-query-vanilla";
+import {
+  angularComponentCode as dynamicAngularComponent,
+  angularTemplateCode as dynamicAngularTemplate,
+} from "../components/examples/advanced-queries/dynamic-query-angular";
+import { DynamicQueryReact } from "../components/examples/advanced-queries/dynamic-query-react";
+import { ConditionalQueryVanilla } from "../components/examples/advanced-queries/conditional-query-vanilla";
+import {
+  angularComponentCode as conditionalAngularComponent,
+  angularTemplateCode as conditionalAngularTemplate,
+} from "../components/examples/advanced-queries/conditional-query-angular";
+import { ConditionalQueryReact } from "../components/examples/advanced-queries/conditional-query-react";
+import {
+  angularComponentCode as multipleAngularComponent,
+  angularTemplateCode as multipleAngularTemplate,
+} from "../components/examples/advanced-queries/multiple-queries-angular";
+import { MultipleQueriesReact } from "../components/examples/advanced-queries/multiple-queries-react";
+import {
+  dynamicQueryReactQueryCode,
+  dynamicQueryVanillaCode,
+  conditionalQueryReactQueryCode,
+  conditionalQueryVanillaCode,
+  typescriptIntegrationReactQueryCode,
+  typescriptIntegrationVanillaCode,
+  typescriptIntegrationAngularCode,
+  multipleQueriesReactQueryCode,
+  multipleQueriesUseQueriesCode,
+  multipleQueriesVanillaCode,
+} from "../components/examples/advanced-queries/code-samples";
+import { CodeExample } from "../components/examples/shared/code-example";
 
-export const Route = createFileRoute('/examples/advanced-queries')({
+export const Route = createFileRoute("/examples/advanced-queries")({
   component: AdvancedQueriesExample,
-})
+});
 
 /**
  * Advanced Querying Techniques - Demonstrating dynamic queries, conditional fetching, and TypeScript integration
@@ -24,246 +44,154 @@ function AdvancedQueriesExample(): React.ReactElement {
   return (
     <div className="space-y-8">
       <header>
-        <h1 className="text-2xl font-bold mb-2">4. Advanced Querying Techniques</h1>
+        <h1 className="text-2xl font-bold mb-2">
+          4. Advanced Querying Techniques
+        </h1>
         <p className="text-gray-600">
-          Learn advanced techniques like dynamic queries, conditional fetching, and managing multiple queries.
+          Learn advanced techniques like dynamic queries, conditional fetching,
+          and managing multiple queries.
         </p>
       </header>
 
-      <CodeExample 
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">
+          Dynamic Queries with Parameters
+        </h2>
+        <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 mb-4">
+          <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">
+            Why is this useful?
+          </h3>
+          <p className="text-blue-700 dark:text-blue-300 text-sm">
+            Dynamic queries allow you to fetch different data based on user
+            input or component state. This is essential for features like user
+            profiles, search results, or any data that depends on parameters.
+            React Query automatically manages caching and refetching when
+            parameters change.
+          </p>
+        </div>
+      </section>
+
+      <CodeExample
         title="Dynamic Queries with Parameters"
         code={[
-          { 
-            name: "React Query", 
-            code: `import { useQuery } from '@tanstack/react-query';
-import { api } from '../api/mock-api';
-
-function DynamicQueryExample({ userId }) {
-  const { data, isPending, isError, error } = useQuery({
-    queryKey: ['user', userId],
-    queryFn: () => api.getUser(userId),
-  });
-
-  if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
-
-  return (
-    <div>
-      <h3>{data.name}</h3>
-      <p>{data.email}</p>
-    </div>
-  );
-}`,
-            language: "typescript"
+          {
+            name: "React Query",
+            code: dynamicQueryReactQueryCode,
+            language: "typescript",
           },
-          { 
-            name: "Vanilla JS", 
-            code: `import { useState, useEffect } from 'react';
-import { api } from '../api/mock-api';
-
-function DynamicQueryVanilla({ userId }) {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    setIsLoading(true);
-    api.getUser(userId)
-      .then(userData => {
-        setData(userData);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        setError(err);
-        setIsLoading(false);
-      });
-  }, [userId]);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
-  return (
-    <div>
-      <h3>{data.name}</h3>
-      <p>{data.email}</p>
-    </div>
-  );
-}`,
-            language: "typescript"
+          {
+            name: "Vanilla JS",
+            code: dynamicQueryVanillaCode,
+            language: "typescript",
           },
-          { 
-            name: "Angular", 
-            code: dynamicAngularComponent + '\n\n' + dynamicAngularTemplate,
-            language: "typescript"
-          }
+          {
+            name: "Angular",
+            code: dynamicAngularComponent + "\n\n" + dynamicAngularTemplate,
+            language: "typescript",
+          },
         ]}
       >
         <div className="space-y-4">
           <p className="text-gray-600">
-            Similar to passing arguments to your DAO methods in Java, React Query allows you to create 
-            dynamic queries by including parameters in the queryKey.
+            Similar to passing arguments to your DAO methods in Java, React
+            Query allows you to create dynamic queries by including parameters
+            in the queryKey.
           </p>
           <DynamicQueryReact />
         </div>
       </CodeExample>
-      
-      <CodeExample 
+
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">
+          Conditional Queries with enabled
+        </h2>
+        <div className="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 mb-4">
+          <h3 className="font-medium text-green-800 dark:text-green-200 mb-2">
+            Why is this useful?
+          </h3>
+          <p className="text-green-700 dark:text-green-300 text-sm">
+            Conditional queries prevent unnecessary network requests and give
+            you fine-grained control over when data is fetched. This is perfect
+            for dependent queries, user permissions, or when you want to wait
+            for user input before loading data.
+          </p>
+        </div>
+      </section>
+
+      <CodeExample
         title="Conditional Queries with enabled"
         code={[
-          { 
-            name: "React Query", 
-            code: `import { useQuery } from '@tanstack/react-query';
-import { api } from '../api/mock-api';
-
-function ConditionalQueryExample({ userId, enabled }) {
-  const { data, isPending, isError, error } = useQuery({
-    queryKey: ['user', userId],
-    queryFn: () => api.getUser(userId),
-    enabled: !!userId && enabled,
-  });
-
-  if (!enabled) return <div>Query disabled</div>;
-  if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
-
-  return (
-    <div>
-      <h3>{data.name}</h3>
-      <p>{data.email}</p>
-    </div>
-  );
-}`,
-            language: "typescript"
+          {
+            name: "React Query",
+            code: conditionalQueryReactQueryCode,
+            language: "typescript",
           },
-          { 
-            name: "Vanilla JS", 
-            code: `import { useState, useEffect } from 'react';
-import { api } from '../api/mock-api';
-
-function ConditionalQueryVanilla({ userId, enabled }) {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    if (!userId || !enabled) return;
-    
-    setIsLoading(true);
-    api.getUser(userId)
-      .then(userData => {
-        setData(userData);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        setError(err);
-        setIsLoading(false);
-      });
-  }, [userId, enabled]);
-
-  if (!enabled) return <div>Query disabled</div>;
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
-  return (
-    <div>
-      <h3>{data?.name}</h3>
-      <p>{data?.email}</p>
-    </div>
-  );
-}`,
-            language: "typescript"
+          {
+            name: "Vanilla JS",
+            code: conditionalQueryVanillaCode,
+            language: "typescript",
           },
-          { 
-            name: "Angular", 
-            code: conditionalAngularComponent + '\n\n' + conditionalAngularTemplate,
-            language: "typescript"
-          }
+          {
+            name: "Angular",
+            code:
+              conditionalAngularComponent + "\n\n" + conditionalAngularTemplate,
+            language: "typescript",
+          },
         ]}
       >
         <div className="space-y-4">
           <p className="text-gray-600">
-            Control when queries run using the enabled option. This is useful for dependent queries or user-controlled fetching.
+            Control when queries run using the enabled option. This is useful
+            for dependent queries or user-controlled fetching.
           </p>
           <ConditionalQueryReact />
         </div>
       </CodeExample>
-      
-      <CodeExample 
+
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">TypeScript Integration</h2>
+        <div className="bg-purple-50 dark:bg-purple-900/20 border-l-4 border-purple-500 p-4 mb-4">
+          <h3 className="font-medium text-purple-800 dark:text-purple-200 mb-2">
+            Why is this useful?
+          </h3>
+          <p className="text-purple-700 dark:text-purple-300 text-sm">
+            TypeScript integration provides compile-time safety, better IDE
+            support, and catches errors before runtime. You get autocomplete for
+            your data structures, type checking for query results, and improved
+            refactoring capabilities.
+          </p>
+        </div>
+      </section>
+
+      <CodeExample
         title="TypeScript Integration"
         code={[
-          { 
-            name: "React Query", 
-            code: `import { useQuery } from '@tanstack/react-query';
-import { api } from '../api/mock-api';
-
-// Define your types
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  role: 'admin' | 'editor' | 'viewer';
-}
-
-function TypedQueryExample() {
-  // TypeScript automatically infers the return type
-  const { data, isPending, isError } = useQuery<User[]>({
-    queryKey: ['users'],
-    queryFn: () => api.getUsers(),
-  });
-
-  if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error loading users</div>;
-
-  return (
-    <ul>
-      {data.map(user => (
-        <li key={user.id}>{user.name} - {user.email}</li>
-      ))}
-    </ul>
-  );
-}`,
-            language: "typescript"
+          {
+            name: "React Query",
+            code: typescriptIntegrationReactQueryCode,
+            language: "typescript",
           },
-          { 
-            name: "Type Definitions", 
-            code: `// Type definitions
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  role: 'admin' | 'editor' | 'viewer';
-}
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  authorId: number;
-  createdAt: string;
-}
-
-// API client with typed methods
-const api = {
-  getUsers: (): Promise<User[]> => {
-    return fetch('/api/users').then(res => res.json());
-  },
-  getUser: (id: number): Promise<User> => {
-    return fetch(\`/api/users/\${id}\`).then(res => res.json());
-  },
-  getPosts: (): Promise<Post[]> => {
-    return fetch('/api/posts').then(res => res.json());
-  }
-};`,
-            language: "typescript"
-          }
+          {
+            name: "Vanilla React",
+            code: typescriptIntegrationVanillaCode,
+            language: "typescript",
+          },
+          {
+            name: "Angular",
+            code: typescriptIntegrationAngularCode,
+            language: "typescript",
+          },
         ]}
       >
         <div className="space-y-4">
           <p className="text-gray-600">
-            React Query works seamlessly with TypeScript, providing strong typing for your queries and results.
+            React Query works seamlessly with TypeScript, providing strong
+            typing for your queries and results.
           </p>
           <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <h3 className="font-medium mb-2">Benefits of TypeScript with React Query:</h3>
+            <h3 className="font-medium mb-2">
+              Benefits of TypeScript with React Query:
+            </h3>
             <ul className="list-disc pl-5 space-y-1">
               <li>Strongly typed query results</li>
               <li>Autocomplete for query options</li>
@@ -273,99 +201,55 @@ const api = {
           </div>
         </div>
       </CodeExample>
-      
-      <CodeExample 
+
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">Multiple Queries</h2>
+        <div className="bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500 p-4 mb-4">
+          <h3 className="font-medium text-orange-800 dark:text-orange-200 mb-2">
+            Why is this useful?
+          </h3>
+          <p className="text-orange-700 dark:text-orange-300 text-sm">
+            Multiple queries allow you to fetch different data sources
+            simultaneously or create dependent queries. This improves
+            performance by parallelizing requests and enables complex data
+            relationships in your applications.
+          </p>
+        </div>
+      </section>
+
+      <CodeExample
         title="Multiple Queries"
         code={[
-          { 
-            name: "React Query", 
-            code: `import { useQuery } from '@tanstack/react-query';
-import { api } from '../api/mock-api';
-
-function MultipleQueriesExample() {
-  // Parallel queries
-  const usersQuery = useQuery({
-    queryKey: ['users'],
-    queryFn: () => api.getUsers(),
-  });
-  
-  const postsQuery = useQuery({
-    queryKey: ['posts'],
-    queryFn: () => api.getPosts(),
-  });
-
-  // Dependent query - only runs when usersQuery succeeds
-  const firstUserPostsQuery = useQuery({
-    queryKey: ['posts', usersQuery.data?.[0]?.id],
-    queryFn: () => api.getUserPosts(usersQuery.data[0].id),
-    enabled: !!usersQuery.data?.[0]?.id,
-  });
-
-  if (usersQuery.isPending || postsQuery.isPending) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div>
-      <h3>Users: {usersQuery.data?.length}</h3>
-      <h3>Posts: {postsQuery.data?.length}</h3>
-      {firstUserPostsQuery.isPending ? (
-        <p>Loading first user's posts...</p>
-      ) : (
-        <p>First user's posts: {firstUserPostsQuery.data?.length}</p>
-      )}
-    </div>
-  );
-}`,
-            language: "typescript"
+          {
+            name: "React Query",
+            code: multipleQueriesReactQueryCode,
+            language: "typescript",
           },
-          { 
-            name: "useQueries", 
-            code: `import { useQueries } from '@tanstack/react-query';
-import { api } from '../api/mock-api';
-
-function DynamicParallelQueries({ userIds }) {
-  // Dynamic parallel queries
-  const userQueries = useQueries({
-    queries: userIds.map(id => ({
-      queryKey: ['user', id],
-      queryFn: () => api.getUser(id),
-    })),
-  });
-
-  const isLoading = userQueries.some(query => query.isPending);
-  const isError = userQueries.some(query => query.isError);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading users</div>;
-
-  return (
-    <div>
-      <h3>Users:</h3>
-      <ul>
-        {userQueries.map((query, index) => (
-          <li key={userIds[index]}>{query.data?.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}`,
-            language: "typescript"
+          {
+            name: "useQueries",
+            code: multipleQueriesUseQueriesCode,
+            language: "typescript",
           },
-          { 
-            name: "Angular", 
-            code: multipleAngularComponent + '\n\n' + multipleAngularTemplate,
-            language: "typescript"
-          }
+          {
+            name: "Vanilla React",
+            code: multipleQueriesVanillaCode,
+            language: "typescript",
+          },
+          {
+            name: "Angular",
+            code: multipleAngularComponent + "\n\n" + multipleAngularTemplate,
+            language: "typescript",
+          },
         ]}
       >
         <div className="space-y-4">
           <p className="text-gray-600">
-            Handle multiple queries efficiently, either in parallel or as dependent queries.
+            Handle multiple queries efficiently, either in parallel or as
+            dependent queries.
           </p>
           <MultipleQueriesReact />
         </div>
       </CodeExample>
     </div>
-  )
+  );
 }
