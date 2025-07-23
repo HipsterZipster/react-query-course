@@ -25,23 +25,26 @@ export const dynamicQueryVanillaCode = `import { useState, useEffect } from 'rea
 import { api } from '../api/mock-api';
 
 function DynamicQueryVanilla({ userId }) {
+  // 🔴 BOILERPLATE: Manual state management for every query
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // 🔴 REPETITIVE: Same loading/error pattern for every query
     setIsLoading(true);
     api.getUser(userId)
       .then(userData => {
         setData(userData);
-        setIsLoading(false);
+        setIsLoading(false); // 🔴 Don't forget to reset loading!
       })
       .catch(err => {
         setError(err);
-        setIsLoading(false);
+        setIsLoading(false); // 🔴 Don't forget to reset loading!
       });
-  }, [userId]);
+  }, [userId]); // 🔴 MANUAL: Must remember dependency array
 
+  // 🔴 REPETITIVE: Same conditional rendering pattern everywhere
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -83,18 +86,21 @@ export const conditionalQueryVanillaCode = `import { useState, useEffect } from 
 import { api } from '../api/mock-api';
 
 function ConditionalQueryVanilla({ userId, isEnabled }) {
+  // 🔴 BOILERPLATE: Same state management repeated again
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // 🔴 COMPLEX: Manual conditional logic with state cleanup
     if (!isEnabled) {
-      setData(null);
+      setData(null);     // 🔴 Must manually reset all state
       setIsLoading(false);
       setError(null);
       return;
     }
 
+    // 🔴 REPETITIVE: Same fetch pattern as every other query
     setIsLoading(true);
     api.getUser(userId)
       .then(userData => {
@@ -105,8 +111,9 @@ function ConditionalQueryVanilla({ userId, isEnabled }) {
         setError(err);
         setIsLoading(false);
       });
-  }, [userId, isEnabled]);
+  }, [userId, isEnabled]); // 🔴 MANUAL: Must track all dependencies
 
+  // 🔴 REPETITIVE: Same conditional rendering logic everywhere
   if (!isEnabled) {
     return <div>Query is disabled</div>;
   }
@@ -181,26 +188,29 @@ interface ApiError {
 }
 
 function TypeScriptVanilla({ userId }: { userId: number }) {
+  // 🔴 MANUAL TYPES: Must explicitly type every state variable
   const [data, setData] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<ApiError | null>(null);
 
   useEffect(() => {
+    // 🔴 REPETITIVE: Same boilerplate pattern with manual types
     setIsLoading(true);
     api.getUser(userId)
-      .then((userData: User) => {
+      .then((userData: User) => {        // 🔴 Must manually type response
         setData(userData);
         setIsLoading(false);
       })
-      .catch((err: ApiError) => {
+      .catch((err: ApiError) => {        // 🔴 Must manually type errors
         setError(err);
         setIsLoading(false);
       });
   }, [userId]);
 
+  // 🔴 MANUAL CHECKS: Must handle null data explicitly
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  if (!data) return <div>No data</div>;
+  if (!data) return <div>No data</div>;  // 🔴 Extra null check needed
 
   return (
     <div>
@@ -346,41 +356,43 @@ export const multipleQueriesVanillaCode = `import { useState, useEffect } from '
 import { api } from '../api/mock-api';
 
 function MultipleQueriesVanilla() {
+  // 🔴 COMPLEX STATE: Must manage multiple pieces of state manually
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [firstUserPosts, setFirstUserPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);  // 🔴 Single loading state for all
+  const [error, setError] = useState(null);          // 🔴 Single error state for all
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         
-        // Parallel requests
+        // 🔴 MANUAL ORCHESTRATION: Must coordinate parallel requests
         const [usersData, postsData] = await Promise.all([
           api.getUsers(),
           api.getPosts()
         ]);
         
+        // 🔴 MANUAL UPDATES: Must update each state individually
         setUsers(usersData);
         setPosts(postsData);
         
-        // Dependent request
+        // 🔴 COMPLEX LOGIC: Must handle dependent queries manually
         if (usersData.length > 0) {
           const firstUserPostsData = await api.getUserPosts(usersData[0].id);
           setFirstUserPosts(firstUserPostsData);
         }
         
-        setIsLoading(false);
+        setIsLoading(false);  // 🔴 Don't forget to reset loading!
       } catch (err) {
         setError(err);
-        setIsLoading(false);
+        setIsLoading(false);  // 🔴 Don't forget to reset loading!
       }
     };
 
-    fetchData();
-  }, []);
+    fetchData();  // 🔴 Must call async function in useEffect
+  }, []);         // 🔴 Empty deps - no refetch capability
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

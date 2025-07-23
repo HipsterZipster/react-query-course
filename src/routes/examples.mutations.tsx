@@ -19,7 +19,55 @@ export const Route = createFileRoute("/examples/mutations")({
   component: MutationsExample,
 });
 
+/**
+ * Mutations Example Page - Demonstrates React Query's useMutation hook
+ * Shows 3 key mutation patterns: Create, Optimistic Updates, and Delete
+ */
 function MutationsExample(): React.ReactElement {
+  const createUserWhy = (
+    <div className="border-l-4 border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-r-lg">
+      <h3 className="font-medium text-emerald-800 dark:text-emerald-200 mb-2">
+        Why is this useful? - Creating Users
+      </h3>
+      <p className="text-emerald-700 dark:text-emerald-300 text-sm">
+        React Query's useMutation hook simplifies data creation by handling
+        loading states, error management, and automatic cache invalidation.
+        Unlike manual approaches, it provides built-in retry logic, optimistic
+        updates, and seamless integration with your query cache, ensuring your
+        UI stays consistent after mutations.
+      </p>
+    </div>
+  );
+
+  const optimisticUpdateWhy = (
+    <div className="border-l-4 border-cyan-500 bg-cyan-50 dark:bg-cyan-900/20 p-4 rounded-r-lg">
+      <h3 className="font-medium text-cyan-800 dark:text-cyan-200 mb-2">
+        Why is this useful? - Optimistic Updates
+      </h3>
+      <p className="text-cyan-700 dark:text-cyan-300 text-sm">
+        Optimistic updates make your app feel instantly responsive by updating
+        the UI immediately, before the server responds. React Query handles the
+        complexity of rolling back changes if the mutation fails, providing a
+        smooth user experience while maintaining data consistency across your
+        application.
+      </p>
+    </div>
+  );
+
+  const deleteUserWhy = (
+    <div className="border-l-4 border-red-500 bg-red-50 dark:bg-red-900/20 p-4 rounded-r-lg">
+      <h3 className="font-medium text-red-800 dark:text-red-200 mb-2">
+        Why is this useful? - Deleting Users
+      </h3>
+      <p className="text-red-700 dark:text-red-300 text-sm">
+        React Query's mutation system provides safe deletion with automatic
+        cache updates, error handling, and loading states. It ensures your UI
+        stays synchronized with the server state and provides built-in patterns
+        for confirmation dialogs and rollback scenarios if deletions fail.
+      </p>
+    </div>
+  );
+
   return (
     <div className="space-y-8">
       <header>
@@ -33,23 +81,10 @@ function MutationsExample(): React.ReactElement {
         </p>
       </header>
 
-      {/* Creating Users Section */}
       <div className="space-y-6">
-        <div className="border-l-4 border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-r-lg">
-          <h3 className="font-medium text-emerald-800 dark:text-emerald-200 mb-2">
-            Why is this useful? - Creating Users
-          </h3>
-          <p className="text-emerald-700 dark:text-emerald-300 text-sm">
-            React Query's useMutation hook simplifies data creation by handling
-            loading states, error management, and automatic cache invalidation.
-            Unlike manual approaches, it provides built-in retry logic,
-            optimistic updates, and seamless integration with your query cache,
-            ensuring your UI stays consistent after mutations.
-          </p>
-        </div>
-
         <CodeExample
           title="Creating Users with Form Handling"
+          why={createUserWhy}
           code={[
             {
               name: "React Query",
@@ -72,23 +107,10 @@ function MutationsExample(): React.ReactElement {
         </CodeExample>
       </div>
 
-      {/* Optimistic Updates Section */}
       <div className="space-y-6">
-        <div className="border-l-4 border-cyan-500 bg-cyan-50 dark:bg-cyan-900/20 p-4 rounded-r-lg">
-          <h3 className="font-medium text-cyan-800 dark:text-cyan-200 mb-2">
-            Why is this useful? - Optimistic Updates
-          </h3>
-          <p className="text-cyan-700 dark:text-cyan-300 text-sm">
-            Optimistic updates make your app feel instantly responsive by
-            updating the UI immediately, before the server responds. React Query
-            handles the complexity of rolling back changes if the mutation
-            fails, providing a smooth user experience while maintaining data
-            consistency across your application.
-          </p>
-        </div>
-
         <CodeExample
           title="Optimistic Updates with Rollback"
+          why={optimisticUpdateWhy}
           code={[
             {
               name: "React Query",
@@ -111,23 +133,10 @@ function MutationsExample(): React.ReactElement {
         </CodeExample>
       </div>
 
-      {/* Delete Operations Section */}
       <div className="space-y-6">
-        <div className="border-l-4 border-red-500 bg-red-50 dark:bg-red-900/20 p-4 rounded-r-lg">
-          <h3 className="font-medium text-red-800 dark:text-red-200 mb-2">
-            Why is this useful? - Delete Operations
-          </h3>
-          <p className="text-red-700 dark:text-red-300 text-sm">
-            React Query streamlines delete operations by automatically removing
-            items from your cache and updating all related queries. This
-            eliminates the need for manual state synchronization and ensures
-            your UI immediately reflects the deletion, maintaining UI
-            consistency across your application.
-          </p>
-        </div>
-
         <CodeExample
           title="Deleting Users with Confirmation"
+          why={deleteUserWhy}
           code={[
             {
               name: "React Query",
