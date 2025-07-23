@@ -17,7 +17,7 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   console.error(error)
 
   return (
-    <div className="min-w-0 flex-1 p-4 flex flex-col items-center justify-center gap-6">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 md:p-8 max-w-full overflow-x-auto">
       <ErrorComponent error={error} />
       <div className="flex gap-2 items-center flex-wrap">
         <button

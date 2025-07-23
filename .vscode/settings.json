@@ -1,0 +1,11 @@
+{
+  "css.validate": true,
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": ["css", "postcss"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": true
+  },
+  "css.lint.unknownAtRules": "ignore",
+  "editor.formatOnSave": true
+}

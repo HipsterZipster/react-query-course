@@ -1,3 +1,6 @@
+@import './holi-prism.css';
+/* @import './cyberpunk-prism.css'; */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

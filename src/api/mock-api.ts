@@ -9,6 +9,7 @@ export interface User {
   readonly name: string;
   readonly email: string;
   readonly role: string;
+  readonly friends?: Pick<User, 'id' | 'name'>[];
 }
 
 export interface Post {
@@ -146,14 +147,18 @@ export const api = {
   /**
    * Get a single user by ID
    */
-  getUser: async (id: number, shouldError = false): Promise<User> => {
+    getUser: async (id: number, includeFriends = false): Promise<User> => {
     await delay(800);
-    if (shouldError) {
-      throw new Error(`Failed to fetch user with ID ${id}`);
-    }
     const user = users.find(user => user.id === id);
     if (!user) {
       throw new Error(`User with ID ${id} not found`);
+    }
+    if (includeFriends) {
+      const friends = users
+        .filter(u => u.id !== id)
+        .slice(0, 2)
+        .map(({ id, name }) => ({ id, name }));
+      return { ...user, friends };
     }
     return user;
   },

@@ -1,0 +1,196 @@
+/* Holi Theme for prism.js */
+
+/* ===== BASE STYLES ===== */
+code[class*='language-'],
+pre[class*='language-'] {
+	color: #ffffff !important;
+	background: #030314 !important;
+	text-shadow: none;
+	font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+	font-size: 0.875em;
+	line-height: 1.5;
+	letter-spacing: .2px;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	text-align: left;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Smaller font size for fullscreen code view */
+.fullscreen-code code[class*='language-'],
+.fullscreen-code pre[class*='language-'] {
+	/* font-size: 0.75em; */
+	/* line-height: 1.4; */
+	color: #ffffff !important;
+}
+
+/* ===== CONTAINER STYLES ===== */
+pre[class*='language-'] {
+	border: 1px solid #2a4555;
+	border-radius: 5px;
+	padding: 1.5em 1em;
+	margin: 1em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*='language-'] {
+	color: #f0f6f6;
+	background: #2a4555;
+	padding: 0.2em 0.3em;
+	border-radius: 0.2em;
+	box-decoration-break: clone;
+}
+
+/* Custom styling for the code container to maintain layout */
+.cyberpunk-code {
+  border: 1px solid #2a4555;
+  border-radius: 5px;
+  background: #030314;
+}
+
+/* ===== SELECTION STYLES ===== */
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection,
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection,
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection,
+code[class*='language-']::selection,
+code[class*='language-'] ::selection {
+	color: inherit;
+	background: #1d3b54;
+	text-shadow: none;
+}
+
+/* ===== LINE NUMBERS ===== */
+.line-number {
+  color: #94a3b8 !important;
+  margin-right: 1em;
+  user-select: none;
+  display: inline-block;
+  text-align: right;
+}
+
+/* ===== TOKEN STYLES ===== */
+
+/* Comments */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #7dd3fc !important;
+	font-style: italic;
+}
+
+/* Punctuation */
+.token.punctuation {
+	color: #fbbf24 !important;
+}
+
+/* Numbers and Booleans */
+.token.boolean,
+.token.number {
+	color: #ffffff !important;
+}
+
+/* Properties and Constants */
+.token.property,
+.token.constant,
+.token.symbol {
+	color: #ffffff !important;
+}
+
+/* Strings and Characters */
+.token.string,
+.token.char {
+	color: #22d3ee !important;
+}
+
+/* Keywords and Attributes */
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #22c55e !important;
+}
+
+/* Functions and Classes */
+.token.function,
+.token.class-name {
+	color: #06b6d4 !important;
+}
+
+/* Operators and Variables */
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable {
+	color: #ec8e01 !important;
+	background: transparent;
+}
+
+/* CSS Specific */
+.language-css .token.string,
+.style .token.string {
+	color: #ec8e01 !important;
+	background: transparent;
+}
+
+/* Selectors and Tags */
+.token.selector,
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+	color: #e60067 !important;
+}
+
+/* Built-ins and Inserted */
+.token.builtin,
+.token.inserted {
+	color: #e60067 !important;
+}
+
+/* TypeScript Specific */
+.token.parameter {
+	color: #ec8e01 !important;
+	font-style: italic;
+}
+
+.token.interface {
+	color: #06b6d4 !important;
+}
+
+.token.type-annotation {
+	color: #06b6d4 !important;
+}
+
+.token.decorator {
+	color: #e60067 !important;
+}
+
+/* Regex and Important */
+.token.regex,
+.token.important {
+	color: #ec8e01 !important;
+	font-weight: bold;
+}
+
+/* Font Styles */
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+
+.token.italic {
+	font-style: italic;
+}

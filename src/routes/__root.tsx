@@ -15,6 +15,25 @@ import { NotFound } from '~/components/NotFound'
 import appCss from '~/styles/app.css?url'
 import { seo } from '~/utils/seo'
 
+interface SidebarLinkProps {
+  readonly to: string;
+  readonly label: string;
+}
+
+function SidebarLink({ to, label }: SidebarLinkProps): React.ReactElement {
+  return (
+    <Link
+      to={to}
+      className="block p-2 hover:bg-gray-100 rounded transition-colors"
+      activeProps={{
+        className: 'bg-blue-50 text-blue-700 font-medium',
+      }}
+    >
+      {label}
+    </Link>
+  )
+}
+
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
 }>()({
@@ -70,7 +89,31 @@ export const Route = createRootRouteWithContext<{
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <div className="w-full px-4 overflow-hidden">
+        <div className="flex flex-col md:flex-row">
+          {/* Sidebar Navigation */}
+          <div className="w-full md:w-64 md:flex-shrink-0 md:pr-6 mb-6 md:mb-0">
+            <h3 className="font-medium text-lg mb-4">Examples</h3>
+            <nav className="space-y-2">
+              <SidebarLink to="/examples/introduction" label="1. Introduction" />
+              <SidebarLink to="/examples/getting-started" label="2. Getting Started" />
+              <SidebarLink to="/examples/basic-query" label="3. Basic Query" />
+              <SidebarLink to="/examples/advanced-queries" label="4. Advanced Queries" />
+              <SidebarLink to="/examples/suspense" label="5. Suspense" />
+            </nav>
+            <div className="mt-6 pt-4 border-t">
+              <Link to="/" className="text-blue-600 hover:underline">
+                &larr; Back to Home
+              </Link>
+            </div>
+          </div>
+          
+          {/* Main Content */}
+          <div className="flex-1 min-w-0 overflow-x-hidden">
+            <Outlet />
+          </div>
+        </div>
+      </div>
     </RootDocument>
   )
 }
@@ -82,59 +125,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <div className="p-2 flex gap-2 text-lg">
-          <Link
-            to="/"
-            activeProps={{
-              className: 'font-bold',
-            }}
-            activeOptions={{ exact: true }}
-          >
-            Home
-          </Link>{' '}
-          <Link
-            to="/posts"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Posts
-          </Link>{' '}
-          <Link
-            to="/users"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Users
-          </Link>{' '}
-          <Link
-            to="/route-a"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Pathless Layout
-          </Link>{' '}
-          <Link
-            to="/deferred"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Deferred
-          </Link>{' '}
-          <Link
-            // @ts-expect-error
-            to="/this-route-does-not-exist"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            This Route Does Not Exist
-          </Link>
-        </div>
-        <hr />
         {children}
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />

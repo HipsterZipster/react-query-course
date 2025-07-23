@@ -50,7 +50,7 @@ function HomePage(): React.ReactElement {
   ]
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       <header>
         <h1 className="text-4xl font-bold mb-2">React Query Course</h1>
         <p className="text-xl text-gray-600">

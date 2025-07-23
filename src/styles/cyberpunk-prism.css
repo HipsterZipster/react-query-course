@@ -1,173 +1,209 @@
-/* Cyberpunk theme for code highlighting */
+/* Cyberpunk Theme for prism.js */
+
+/* ===== BASE STYLES ===== */
 .cyberpunk-code {
-  background-color: #0d1117;
-  color: #ffffff;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #38bdf8;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  overflow-x: auto;
-  position: relative;
-  text-shadow: none;
-  font-weight: normal;
+    background-color: #0d1117  !important;
+    color: #ffffff !important;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+    line-height: 1.5;
+    overflow-x: auto;
+    position: relative;
+    text-shadow: none;
+    font-weight: normal;
 }
 
+/* Smaller font size for fullscreen code view */
+.fullscreen-code .cyberpunk-code {
+    /* font-size: 0.75em; */
+    /* line-height: 1.4; */
+}
+
+/* ===== LINE NUMBERS ===== */
 .cyberpunk-code .line-number {
-  display: inline-block;
-  width: 2em;
-  padding-right: 1em;
-  margin-right: 1em;
-  text-align: right;
-  color: #d946ef;
-  border-right: 1px solid #d946ef;
-  user-select: none;
-  opacity: 0.8;
+    display: inline-block;
+    width: 2em;
+    padding-right: 1em;
+    margin-right: 1em;
+    text-align: right;
+    color: #d946ef !important;
+    border-right: 1px solid #d946ef;
+    user-select: none;
+    opacity: 0.8;
 }
+  
+/* ===== TOKEN STYLES ===== */
 
+/* Comments */
 .cyberpunk-code .token.comment,
 .cyberpunk-code .token.block-comment,
 .cyberpunk-code .token.prolog,
 .cyberpunk-code .token.doctype,
 .cyberpunk-code .token.cdata {
-  color: #a78bfa;
-  font-style: italic;
-  font-weight: normal;
+    color: #a78bfa !important;
+    font-style: italic;
+    font-weight: normal;
 }
 
+/* Punctuation */
+.cyberpunk-code .token.punctuation {
+    color: #f472b6 !important;
+    font-weight: bold;
+}
+
+/* Numbers and Booleans */
 .cyberpunk-code .token.boolean,
 .cyberpunk-code .token.number {
-  color: #60a5fa;
-  font-weight: bold;
+    color: #60a5fa !important;
+    font-weight: bold;
 }
 
-.cyberpunk-code .token.punctuation {
-  color: #f472b6;
-  font-weight: bold;
-}
-
+/* Properties and Constants */
 .cyberpunk-code .token.property,
-.cyberpunk-code .token.constant {
-  color: #fbbf24;
-  font-weight: bold;
-}
-
+.cyberpunk-code .token.constant,
 .cyberpunk-code .token.symbol {
-  color: #fbbf24;
-  font-weight: bold;
+    color: #fbbf24 !important;
+    font-weight: bold;
 }
 
+/* Strings and Characters */
 .cyberpunk-code .token.string,
 .cyberpunk-code .token.char {
-  color: #fb7185;
-  font-weight: bold;
+    color: #fb7185 !important;
+    font-weight: bold;
+}
+  
+/* Keywords and Attributes */
+.cyberpunk-code .token.atrule,
+.cyberpunk-code .token.attr-value,
+.cyberpunk-code .token.keyword {
+    color: #e879f9 !important;
+    font-weight: bold;
 }
 
+/* Functions and Classes */
+.cyberpunk-code .token.function,
+.cyberpunk-code .token.function-name,
+.cyberpunk-code .token.class-name {
+    color: #22d3ee !important;
+    font-weight: bold;
+}
+
+/* Operators and Variables */
+.cyberpunk-code .token.operator,
+.cyberpunk-code .token.entity,
+.cyberpunk-code .token.url,
+.cyberpunk-code .token.variable {
+    color: #fb923c !important;
+    font-weight: bold;
+}
+
+/* CSS Specific */
+.cyberpunk-code .language-css .token.string,
+.cyberpunk-code .style .token.string {
+    color: #fb923c !important;
+    font-weight: bold;
+}
+
+/* Selectors and Tags */
 .cyberpunk-code .token.selector,
 .cyberpunk-code .token.tag,
 .cyberpunk-code .token.attr-name,
 .cyberpunk-code .token.namespace,
 .cyberpunk-code .token.deleted {
-  color: #fb7185;
-  font-weight: bold;
+    color: #fb7185 !important;
+    font-weight: bold;
 }
 
-.cyberpunk-code .token.operator,
-.cyberpunk-code .token.entity,
-.cyberpunk-code .token.url,
-.cyberpunk-code .language-css .token.string,
-.cyberpunk-code .style .token.string,
-.cyberpunk-code .token.variable {
-  color: #fb923c;
-  font-weight: bold;
+/* Built-ins and Inserted */
+.cyberpunk-code .token.builtin,
+.cyberpunk-code .token.inserted {
+    color: #fb7185 !important;
+    font-weight: bold;
 }
 
-.cyberpunk-code .token.attr-value,
-.cyberpunk-code .token.keyword {
-  color: #e879f9;
-  font-weight: bold;
-}
-
-.cyberpunk-code .token.function,
-.cyberpunk-code .token.function-name {
-  color: #22d3ee;
-  font-weight: bold;
-}
-
+/* Regex and Important */
 .cyberpunk-code .token.regex,
 .cyberpunk-code .token.important {
-  color: #f59e0b;
-  font-weight: bold;
+    color: #f59e0b !important;
+    font-weight: bold;
 }
 
+/* Font Styles */
 .cyberpunk-code .token.important,
 .cyberpunk-code .token.bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .cyberpunk-code .token.italic {
-  font-style: italic;
+    font-style: italic;
 }
-
-/* TypeScript specific */
-.cyberpunk-code .token.class-name {
-  color: #0ea5e9;
-  font-weight: bold;
-  text-decoration: underline;
-  text-decoration-color: rgba(14, 165, 233, 0.5);
-}
-
+  
+/* TypeScript Specific */
 .cyberpunk-code .token.parameter {
-  color: #fb923c;
-  font-style: italic;
-}
-
-.cyberpunk-code .token.namespace {
-  color: #ff00aa;
+    color: #fb923c !important;
+    font-style: italic;
 }
 
 .cyberpunk-code .token.interface {
-  color: #00ffaa;
+    color: #00ffaa !important;
 }
 
 .cyberpunk-code .token.type-annotation {
-  color: #00ffaa;
+    color: #00ffaa !important;
 }
 
 .cyberpunk-code .token.decorator {
-  color: #ff00ff;
+    color: #ff00ff !important;
 }
+
+.cyberpunk-code .token.namespace {
+    color: #ff00aa !important;
+}
+
+/* Special class-name styling with underline */
+.cyberpunk-code .token.class-name {
+    color: #0ea5e9 !important;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: rgba(14, 165, 233, 0.5);
+}
+
+/* ===== CYBERPUNK EFFECTS ===== */
 
 /* Glow effect for special elements */
 .cyberpunk-code .token.function,
 .cyberpunk-code .token.class-name,
 .cyberpunk-code .token.keyword {
-  text-shadow: 0 0 2px currentColor;
+    text-shadow: 0 0 2px currentColor;
 }
 
 /* Background scanning effect */
 .cyberpunk-code::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #00ffff, transparent);
-  animation: scan 4s linear infinite;
-  z-index: 1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ffff, transparent);
+    animation: scan 4s linear infinite;
+    z-index: 1;
 }
 
 @keyframes scan {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
+  
