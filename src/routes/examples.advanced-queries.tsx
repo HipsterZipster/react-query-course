@@ -1,14 +1,12 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery, useQueries } from "@tanstack/react-query";
-import { api, Post, User, useErrorToggle } from "../api/mock-api";
-import { DynamicQueryVanilla } from "../components/examples/advanced-queries/dynamic-query-vanilla";
+
 import {
   angularComponentCode as dynamicAngularComponent,
   angularTemplateCode as dynamicAngularTemplate,
 } from "../components/examples/advanced-queries/dynamic-query-angular";
 import { DynamicQueryReact } from "../components/examples/advanced-queries/dynamic-query-react";
-import { ConditionalQueryVanilla } from "../components/examples/advanced-queries/conditional-query-vanilla";
+
 import {
   angularComponentCode as conditionalAngularComponent,
   angularTemplateCode as conditionalAngularTemplate,
@@ -32,6 +30,76 @@ import {
   multipleQueriesVanillaCode,
 } from "../components/examples/advanced-queries/code-samples";
 import { CodeExample } from "../components/examples/shared/code-example";
+import { useMemo } from "react";
+
+// Why content constants to prevent re-renders
+const dynamicQueryWhy = useMemo(
+  () => (
+    <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 mb-4">
+      <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">
+        Why is this useful?
+      </h3>
+      <p className="text-blue-700 dark:text-blue-300 text-sm">
+        Dynamic queries allow you to fetch different data based on user input or
+        component state. This is essential for features like user profiles,
+        search results, or any data that depends on parameters. React Query
+        automatically manages caching and refetching when parameters change.
+      </p>
+    </div>
+  ),
+  []
+);
+
+const conditionalQueryWhy = useMemo(
+  () => (
+    <div className="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 mb-4">
+      <h3 className="font-medium text-green-800 dark:text-green-200 mb-2">
+        Why is this useful?
+      </h3>
+      <p className="text-green-700 dark:text-green-300 text-sm">
+        Conditional queries prevent unnecessary network requests and give you
+        fine-grained control over when data is fetched. This is perfect for
+        dependent queries, user permissions, or when you want to wait for user
+        input before loading data.
+      </p>
+    </div>
+  ),
+  []
+);
+
+const typescriptIntegrationWhy = useMemo(
+  () => (
+    <div className="bg-purple-50 dark:bg-purple-900/20 border-l-4 border-purple-500 p-4 mb-4">
+      <h3 className="font-medium text-purple-800 dark:text-purple-200 mb-2">
+        Why is this useful?
+      </h3>
+      <p className="text-purple-700 dark:text-purple-300 text-sm">
+        TypeScript integration provides compile-time safety, better IDE support,
+        and catches errors before runtime. You get autocomplete for your data
+        structures, type checking for query results, and improved refactoring
+        capabilities.
+      </p>
+    </div>
+  ),
+  []
+);
+
+const multipleQueriesWhy = useMemo(
+  () => (
+    <div className="bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500 p-4 mb-4">
+      <h3 className="font-medium text-orange-800 dark:text-orange-200 mb-2">
+        Why is this useful?
+      </h3>
+      <p className="text-orange-700 dark:text-orange-300 text-sm">
+        Multiple queries allow you to fetch different data sources
+        simultaneously or create dependent queries. This improves performance by
+        parallelizing requests and enables complex data relationships in your
+        applications.
+      </p>
+    </div>
+  ),
+  []
+);
 
 export const Route = createFileRoute("/examples/advanced-queries")({
   component: AdvancedQueriesExample,
@@ -53,26 +121,9 @@ function AdvancedQueriesExample(): React.ReactElement {
         </p>
       </header>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">
-          Dynamic Queries with Parameters
-        </h2>
-        <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 mb-4">
-          <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">
-            Why is this useful?
-          </h3>
-          <p className="text-blue-700 dark:text-blue-300 text-sm">
-            Dynamic queries allow you to fetch different data based on user
-            input or component state. This is essential for features like user
-            profiles, search results, or any data that depends on parameters.
-            React Query automatically manages caching and refetching when
-            parameters change.
-          </p>
-        </div>
-      </section>
-
       <CodeExample
         title="Dynamic Queries with Parameters"
+        why={dynamicQueryWhy}
         code={[
           {
             name: "React Query",
@@ -80,7 +131,7 @@ function AdvancedQueriesExample(): React.ReactElement {
             language: "typescript",
           },
           {
-            name: "Vanilla JS",
+            name: "Vanilla React",
             code: dynamicQueryVanillaCode,
             language: "typescript",
           },
@@ -101,25 +152,9 @@ function AdvancedQueriesExample(): React.ReactElement {
         </div>
       </CodeExample>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">
-          Conditional Queries with enabled
-        </h2>
-        <div className="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 mb-4">
-          <h3 className="font-medium text-green-800 dark:text-green-200 mb-2">
-            Why is this useful?
-          </h3>
-          <p className="text-green-700 dark:text-green-300 text-sm">
-            Conditional queries prevent unnecessary network requests and give
-            you fine-grained control over when data is fetched. This is perfect
-            for dependent queries, user permissions, or when you want to wait
-            for user input before loading data.
-          </p>
-        </div>
-      </section>
-
       <CodeExample
         title="Conditional Queries with enabled"
+        why={conditionalQueryWhy}
         code={[
           {
             name: "React Query",
@@ -127,7 +162,7 @@ function AdvancedQueriesExample(): React.ReactElement {
             language: "typescript",
           },
           {
-            name: "Vanilla JS",
+            name: "Vanilla React",
             code: conditionalQueryVanillaCode,
             language: "typescript",
           },
@@ -148,23 +183,9 @@ function AdvancedQueriesExample(): React.ReactElement {
         </div>
       </CodeExample>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">TypeScript Integration</h2>
-        <div className="bg-purple-50 dark:bg-purple-900/20 border-l-4 border-purple-500 p-4 mb-4">
-          <h3 className="font-medium text-purple-800 dark:text-purple-200 mb-2">
-            Why is this useful?
-          </h3>
-          <p className="text-purple-700 dark:text-purple-300 text-sm">
-            TypeScript integration provides compile-time safety, better IDE
-            support, and catches errors before runtime. You get autocomplete for
-            your data structures, type checking for query results, and improved
-            refactoring capabilities.
-          </p>
-        </div>
-      </section>
-
       <CodeExample
         title="TypeScript Integration"
+        why={typescriptIntegrationWhy}
         code={[
           {
             name: "React Query",
@@ -202,23 +223,9 @@ function AdvancedQueriesExample(): React.ReactElement {
         </div>
       </CodeExample>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Multiple Queries</h2>
-        <div className="bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500 p-4 mb-4">
-          <h3 className="font-medium text-orange-800 dark:text-orange-200 mb-2">
-            Why is this useful?
-          </h3>
-          <p className="text-orange-700 dark:text-orange-300 text-sm">
-            Multiple queries allow you to fetch different data sources
-            simultaneously or create dependent queries. This improves
-            performance by parallelizing requests and enables complex data
-            relationships in your applications.
-          </p>
-        </div>
-      </section>
-
       <CodeExample
         title="Multiple Queries"
+        why={multipleQueriesWhy}
         code={[
           {
             name: "React Query",

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { api, User, useErrorToggle } from "~/api/mock-api";
+import { api, useErrorToggle } from "~/api/mock-api";
 import { CodeExample } from "~/components/examples/shared/code-example";
 import {
   userListAngularCode,
@@ -119,7 +119,7 @@ function BasicQueryExample(): React.ReactElement {
               language: "typescript",
             },
             {
-              name: "Vanilla JS",
+              name: "Vanilla React",
               code: userListVanillaCode,
               language: "typescript",
             },

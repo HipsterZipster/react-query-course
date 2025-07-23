@@ -17,12 +17,14 @@ interface CodeExampleProps {
   readonly children: React.ReactNode;
   readonly code: readonly CodeFile[];
   readonly title?: string;
+  readonly why?: React.ReactNode;
 }
 
 export function CodeExample({
   children,
   code,
   title,
+  why,
 }: CodeExampleProps): React.ReactElement {
   const [isFullScreen, setIsFullScreen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState(0);
@@ -62,48 +64,43 @@ export function CodeExample({
       .join("\n");
   };
 
-  // Function to highlight code with Prism
-  const highlightCode = React.useCallback(
-    (code: string, language: string): string => {
-      // Only run on client side
-      if (typeof window === "undefined") {
-        return addLineNumbers(code);
+  // Memoize the highlighted code to prevent re-renders
+  const highlightedCode = React.useMemo(() => {
+    // Only run on client side
+    if (typeof window === "undefined") {
+      return addLineNumbers(activeCodeFile.code);
+    }
+
+    // Clean and normalize the code first
+    const cleanCode = activeCodeFile.code
+      .trim() // Remove leading/trailing whitespace
+      .replace(/\t/g, "  "); // Convert tabs to 2 spaces for consistency
+
+    // Dynamically import Prism only on client side
+    let highlighted = cleanCode;
+    try {
+      // Access Prism from window global
+      const Prism = (window as any).Prism;
+      if (Prism) {
+        // Default to typescript if language is not supported
+        const lang = Prism.languages[activeCodeFile.language]
+          ? activeCodeFile.language
+          : "typescript";
+        highlighted = Prism.highlight(cleanCode, Prism.languages[lang], lang);
       }
+      return addLineNumbers(highlighted);
+    } catch (error) {
+      console.error("Error highlighting code:", error);
+      return addLineNumbers(cleanCode);
+    }
+  }, [activeCodeFile.code, activeCodeFile.language]);
 
-      // Clean and normalize the code first
-      const cleanCode = code
-        .trim() // Remove leading/trailing whitespace
-        .replace(/\t/g, "  "); // Convert tabs to 2 spaces for consistency
-
-      // Dynamically import Prism only on client side
-      let highlightedCode = cleanCode;
-      try {
-        // Access Prism from window global
-        const Prism = (window as any).Prism;
-        if (Prism) {
-          // Default to typescript if language is not supported
-          const lang = Prism.languages[language] ? language : "typescript";
-          highlightedCode = Prism.highlight(
-            cleanCode,
-            Prism.languages[lang],
-            lang
-          );
-        }
-        return addLineNumbers(highlightedCode);
-      } catch (error) {
-        console.error("Error highlighting code:", error);
-        return addLineNumbers(cleanCode);
-      }
-    },
-    []
-  );
-
-  // Effect to highlight code when tab changes and load Prism
+  // Effect to load Prism only once
   React.useEffect(() => {
     // Only run on client side
     if (typeof window === "undefined") return;
 
-    // Dynamically import Prism
+    // Dynamically import Prism only if not already loaded
     const loadPrism = async (): Promise<void> => {
       if (!(window as any).Prism) {
         try {
@@ -123,21 +120,10 @@ export function CodeExample({
           console.error("Failed to load Prism:", error);
         }
       }
-
-      // Update all code elements with the cyberpunk-code class
-      const codeElements = document.querySelectorAll(".cyberpunk-code code");
-      codeElements.forEach((element) => {
-        if (activeCodeFile && element) {
-          element.innerHTML = highlightCode(
-            activeCodeFile.code,
-            activeCodeFile.language
-          );
-        }
-      });
     };
 
     loadPrism();
-  }, [activeCodeFile, highlightCode, isFullScreen]);
+  }, []); // Empty dependency array - only run once
 
   const codePane = (
     <div className="bg-gray-900 rounded-lg flex flex-col h-full border border-cyan-500">
@@ -181,10 +167,7 @@ export function CodeExample({
           <code
             className={`language-${activeCodeFile.language}`}
             dangerouslySetInnerHTML={{
-              __html: highlightCode(
-                activeCodeFile.code,
-                activeCodeFile.language
-              ),
+              __html: highlightedCode,
             }}
           />
         </pre>
@@ -224,6 +207,7 @@ export function CodeExample({
       <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-cyan-300">
         <span className="border-b-2 border-fuchsia-500 pb-1">{title}</span>
       </h2>
+      {why && <div className="mb-4">{why}</div>}
       <div
         className="flex flex-col md:flex-row gap-6"
         style={{ height: "600px" }}

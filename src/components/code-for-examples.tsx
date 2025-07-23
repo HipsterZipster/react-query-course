@@ -243,10 +243,9 @@ export class UserListComponent implements OnInit {
 </ng-template>
 `;
 
-export const suspenseReactQueryCode = `
+export const suspenseTraditionalReactQueryCode = `
 import * as React from 'react'
-import { Suspense } from 'react'
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { api, Post } from '../api/mock-api'
 
 /**
@@ -274,9 +273,7 @@ function TraditionalPosts(): React.ReactElement {
     return (
       <div className="p-6 bg-red-50 border border-red-200 rounded-lg">
         <h3 className="text-red-700 font-medium mb-2">Error Loading Posts</h3>
-        <p className="text-red-600">
-          {postsQuery.error.message}
-        </p>
+        <p className="text-red-600">{postsQuery.error?.message}</p>
       </div>
     )
   }
@@ -297,6 +294,22 @@ function TraditionalPosts(): React.ReactElement {
   )
 }
 
+export function TraditionalReactQueryExample(): React.ReactElement {
+  return (
+    <div>
+      <h3 className="text-lg font-medium mb-2">Traditional useQuery Example</h3>
+      <TraditionalPosts />
+    </div>
+  )
+}
+`;
+
+export const suspenseReactQueryCode = `
+import * as React from 'react'
+import { Suspense } from 'react'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { api, Post } from '../api/mock-api'
+
 /**
  * Suspense Posts component using useSuspenseQuery - no loading states needed!
  */
@@ -306,12 +319,11 @@ function SuspensePosts(): React.ReactElement {
     queryKey: ['posts'], 
     queryFn: () => api.getPosts(),
   })
-  // No isPending check needed - component won't render until data is available
-  // No isError check needed - errors are thrown and caught by Error Boundaries
 
+  // No loading state needed! Component only renders when data is available
   return (
     <div className="border rounded divide-y">
-      {data.map((post) => ( // No optional chaining needed - data is guaranteed
+      {data.map((post) => (
         <div key={post.id} className="p-3">
           <h3 className="font-medium">{post.title}</h3>
           <p className="text-sm text-gray-600">{post.content.substring(0, 100)}...</p>
@@ -324,9 +336,7 @@ function SuspensePosts(): React.ReactElement {
   )
 }
 
-/**
- * Loading fallback component for Suspense
- */
+// Loading fallback component for Suspense
 function LoadingFallback(): React.ReactElement {
   return (
     <div className="p-8 text-center">
@@ -336,6 +346,7 @@ function LoadingFallback(): React.ReactElement {
   )
 }
 
+// Error boundary to catch errors from suspended components
 class ErrorBoundary extends React.Component<
   { readonly children: React.ReactNode },
   { hasError: boolean; error: Error | null }
@@ -345,11 +356,11 @@ class ErrorBoundary extends React.Component<
     this.state = { hasError: false, error: null }
   }
 
-  static getDerivedStateFromError(error: Error): { hasError: boolean; error: Error } {
+  static getDerivedStateFromError(error: Error) {
     return { hasError: true, error }
   }
 
-  render(): React.ReactNode {
+  render() {
     if (this.state.hasError) {
       return (
         <div className="p-6 bg-red-50 border border-red-200 rounded-lg">
@@ -365,51 +376,17 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// Main component to render
-export function SuspenseReactQueryExample() {
-  const [useSuspense, setUseSuspense] = React.useState<boolean>(false);
-
+export function SuspenseReactQueryExample(): React.ReactElement {
   return (
-    <div className="space-y-4">
-      <div className="flex justify-center">
-        <div className="inline-flex rounded-md shadow-sm" role="group">
-          <button
-            type="button"
-            onClick={() => setUseSuspense(false)}
-            className="px-4 py-2 text-sm font-medium rounded-l-lg border border-gray-200"
-          >
-            Traditional useQuery
-          </button>
-          <button
-            type="button"
-            onClick={() => setUseSuspense(true)}
-            className="px-4 py-2 text-sm font-medium rounded-r-lg border border-gray-200"
-          >
-            useSuspenseQuery
-          </button>
-        </div>
-      </div>
-
-      {useSuspense ? (
-        <div>
-          <h3 className="text-lg font-medium mb-2">Suspense Example</h3>
-          <p className="mb-3 text-sm text-gray-600">
-            Notice how we don't need to handle loading states manually. React Suspense takes care of it.
-          </p>
-          <ErrorBoundary>
-            <Suspense fallback={<LoadingFallback />}>
-              <SuspensePosts />
-            </Suspense>
-          </ErrorBoundary>
-        </div>
-      ) : (
-        <div>
-          <h3 className="text-lg font-medium mb-2">Traditional Example</h3>
-          <TraditionalPosts />
-        </div>
-      )}
+    <div>
+      <h3 className="text-lg font-medium mb-2">Suspense useQuery Example</h3>
+      <ErrorBoundary>
+        <Suspense fallback={<LoadingFallback />}>
+          <SuspensePosts />
+        </Suspense>
+      </ErrorBoundary>
     </div>
-  );
+  )
 }
 `;
 

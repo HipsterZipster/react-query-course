@@ -21,17 +21,17 @@ export const Route = createFileRoute("/examples/mutations")({
 
 function MutationsExample(): React.ReactElement {
   return (
-    <div className="container mx-auto px-4 py-8 space-y-12">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          Mutations with React Query
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold mb-2">
+          5. Mutations with React Query
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        <p className="text-gray-600">
           Learn how to perform data mutations (create, update, delete) with
           React Query's useMutation hook, including optimistic updates and error
           handling.
         </p>
-      </div>
+      </header>
 
       {/* Creating Users Section */}
       <div className="space-y-6">
@@ -278,7 +278,7 @@ function OptimisticUpdateExample(): React.ReactElement {
       return { previousUser };
     },
 
-    onError: (err, updatedUser, context) => {
+    onError: (_, __, context) => {
       // Rollback optimistic update on error
       if (context?.previousUser) {
         setCurrentUser(context.previousUser);

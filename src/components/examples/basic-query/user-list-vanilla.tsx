@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { api, User, useErrorToggle } from '../../../api/mock-api'
+import { api, User } from '../../../api/mock-api'
 
 export function UserListVanilla({ shouldError }: { readonly shouldError: boolean }): React.ReactElement {
   const [users, setUsers] = React.useState<User[]>([])

@@ -2,16 +2,12 @@ import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CodeExample } from "../components/examples/shared/code-example";
 import {
+  suspenseTraditionalReactQueryCode,
   suspenseReactQueryCode,
   suspenseVanillaCode,
   suspenseAngularCode,
 } from "../components/code-for-examples";
 import { SuspenseReactQueryExample } from "../components/examples/suspense/SuspenseReactQueryExample";
-import { api, Post, User } from "../api/mock-api";
-import {
-  angularComponentCode,
-  angularTemplateCode,
-} from "../components/examples/suspense/suspense-angular";
 
 export const Route = createFileRoute("/examples/suspense")({
   component: SuspenseExample,
@@ -55,7 +51,12 @@ function SuspenseExample(): React.ReactElement {
         title="Suspense with React Query"
         code={[
           {
-            name: "React Query",
+            name: "Traditional React Query",
+            code: suspenseTraditionalReactQueryCode,
+            language: "typescript",
+          },
+          {
+            name: "React Query Suspense",
             code: suspenseReactQueryCode,
             language: "typescript",
           },

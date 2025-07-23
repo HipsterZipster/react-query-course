@@ -14,7 +14,7 @@ import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
 import { NotFound } from "~/components/NotFound";
 import { CollapseContentIcon, ExpandContentIcon } from "~/components/icons";
 import appCss from "~/styles/app.css?url";
-import { seo } from "~/utils/seo";
+
 
 interface SidebarLinkProps {
   readonly to: string;
@@ -47,11 +47,13 @@ export const Route = createRootRouteWithContext<{
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      ...seo({
-        title:
-          "TanStack Start | Type-Safe, Client-First, Full-Stack React Framework",
-        description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
-      }),
+      {
+        title: "React Query Course | Learn TanStack Query",
+      },
+      {
+        name: "description",
+        content: "Learn React Query (TanStack Query) with practical examples and hands-on tutorials.",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
