@@ -1,11 +1,13 @@
 import React from "react";
-import { 
-  CodeIcon, 
-  PlayIcon, 
-  ExpandIcon, 
-  CompressIcon,
-  CollapseIcon,
-  ExpandPanelIcon
+import {
+  CodeIcon,
+  PlayIcon,
+  // ExpandIcon,
+  // CompressIcon,
+  CollapseContentIcon,
+  ExpandContentIcon,
+  FullScreenIcon,
+  ExitFullScreenIcon,
 } from "./icons";
 
 interface CodeFile {
@@ -162,16 +164,16 @@ export function CodeExample({
           <button
             onClick={toggleExample}
             className="p-1 text-cyan-300 hover:text-cyan-100 hover:bg-gray-700 rounded-full"
-            title={showExample ? "Hide Example" : "Show Example"}
+            title={showCode ? "Expand Code" : "Collapse Code"}
           >
-            {showExample ? <CollapseIcon /> : <ExpandPanelIcon />}
+            {showCode ? <ExpandContentIcon /> : <CollapseContentIcon />}
           </button>
           <button
             onClick={() => setIsFullScreen(!isFullScreen)}
             className="p-1 text-cyan-300 hover:text-cyan-100 hover:bg-gray-700 rounded-full"
             title={isFullScreen ? "Exit Fullscreen" : "Enter Fullscreen"}
           >
-            {isFullScreen ? <CompressIcon /> : <ExpandIcon />}
+            {isFullScreen ? <ExitFullScreenIcon /> : <FullScreenIcon />}
           </button>
         </div>
       </div>
@@ -203,9 +205,9 @@ export function CodeExample({
         <button
           onClick={toggleCode}
           className="p-1 text-fuchsia-400 hover:text-fuchsia-300 hover:bg-fuchsia-900/30 rounded-full"
-          title={showCode ? "Hide Code" : "Show Code"}
+          title={showCode ? "Expand Live Example" : "Collapse Live Example"}
         >
-          {showCode ? <CollapseIcon /> : <CodeIcon />}
+          {showCode ? <ExpandContentIcon /> : <CollapseContentIcon />}
         </button>
       </div>
       <div className="flex-grow p-4 overflow-auto">{children}</div>

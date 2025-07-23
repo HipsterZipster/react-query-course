@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface IconProps {
   width?: number;
@@ -6,7 +6,11 @@ interface IconProps {
   className?: string;
 }
 
-export const EyeIcon: React.FC<IconProps> = ({ width = 20, height = 20, className = "" }) => (
+export const EyeIcon: React.FC<IconProps> = ({
+  width = 20,
+  height = 20,
+  className = "",
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -23,7 +27,11 @@ export const EyeIcon: React.FC<IconProps> = ({ width = 20, height = 20, classNam
   </svg>
 );
 
-export const EyeSlashIcon: React.FC<IconProps> = ({ width = 20, height = 20, className = "" }) => (
+export const EyeSlashIcon: React.FC<IconProps> = ({
+  width = 20,
+  height = 20,
+  className = "",
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -40,7 +48,11 @@ export const EyeSlashIcon: React.FC<IconProps> = ({ width = 20, height = 20, cla
   </svg>
 );
 
-export const CodeIcon: React.FC<IconProps> = ({ width = 20, height = 20, className = "" }) => (
+export const CodeIcon: React.FC<IconProps> = ({
+  width = 20,
+  height = 20,
+  className = "",
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -57,7 +69,11 @@ export const CodeIcon: React.FC<IconProps> = ({ width = 20, height = 20, classNa
   </svg>
 );
 
-export const PlayIcon: React.FC<IconProps> = ({ width = 16, height = 16, className = "" }) => (
+export const PlayIcon: React.FC<IconProps> = ({
+  width = 16,
+  height = 16,
+  className = "",
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -74,7 +90,11 @@ export const PlayIcon: React.FC<IconProps> = ({ width = 16, height = 16, classNa
   </svg>
 );
 
-export const ExpandIcon: React.FC<IconProps> = ({ width = 20, height = 20, className = "" }) => (
+export const ExpandIcon: React.FC<IconProps> = ({
+  width = 20,
+  height = 20,
+  className = "",
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -91,7 +111,11 @@ export const ExpandIcon: React.FC<IconProps> = ({ width = 20, height = 20, class
   </svg>
 );
 
-export const CompressIcon: React.FC<IconProps> = ({ width = 20, height = 20, className = "" }) => (
+export const CompressIcon: React.FC<IconProps> = ({
+  width = 20,
+  height = 20,
+  className = "",
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -108,7 +132,11 @@ export const CompressIcon: React.FC<IconProps> = ({ width = 20, height = 20, cla
   </svg>
 );
 
-export const CollapseIcon: React.FC<IconProps> = ({ width = 20, height = 20, className = "" }) => (
+export const FullScreenIcon: React.FC<IconProps> = ({
+  width = 20,
+  height = 20,
+  className = "",
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -121,11 +149,15 @@ export const CollapseIcon: React.FC<IconProps> = ({ width = 20, height = 20, cla
     strokeLinejoin="round"
     className={className}
   >
-    <path d="m7 14 5-5 5 5" />
+    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
   </svg>
 );
 
-export const ExpandPanelIcon: React.FC<IconProps> = ({ width = 20, height = 20, className = "" }) => (
+export const ExitFullScreenIcon: React.FC<IconProps> = ({
+  width = 20,
+  height = 20,
+  className = "",
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -138,6 +170,40 @@ export const ExpandPanelIcon: React.FC<IconProps> = ({ width = 20, height = 20, 
     strokeLinejoin="round"
     className={className}
   >
-    <path d="m17 14-5 5-5-5" />
+    <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 0-2-2h-3M3 16h3a2 2 0 0 0 2-2v-3" />
+  </svg>
+);
+
+export const CollapseContentIcon: React.FC<IconProps> = ({
+  width = 20,
+  height = 20,
+  className = "",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox="0 -960 960 960"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M440-440v240h-80v-160H200v-80h240Zm160-320v160h160v80H520v-240h80Z" />
+  </svg>
+);
+
+export const ExpandContentIcon: React.FC<IconProps> = ({
+  width = 20,
+  height = 20,
+  className = "",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox="0 -960 960 960"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M200-200v-240h80v160h160v80H200Zm480-320v-160H520v-80h240v240h-80Z" />
   </svg>
 );
