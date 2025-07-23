@@ -63,12 +63,12 @@ function BasicQueryExample(): React.ReactElement {
               </p>
               <div className="mt-1 space-y-1">
                 <p className="text-xs bg-blue-100 p-2 rounded">
-                  <strong>Java Analogy:</strong> Like a unique identifier in a Java Map
-                  or database primary key.
+                  <strong>Java Analogy:</strong> Like a unique identifier in a
+                  Java Map or database primary key.
                 </p>
                 <p className="text-xs bg-red-100 p-2 rounded">
-                  <strong>Angular Analogy:</strong> Like a trackBy function key in Angular's *ngFor
-                  or a route parameter identifier.
+                  <strong>Angular Analogy:</strong> Like a trackBy function key
+                  in Angular's *ngFor or a route parameter identifier.
                 </p>
               </div>
             </div>
@@ -292,9 +292,6 @@ function BasicQueryExample(): React.ReactElement {
           <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
             <strong>Lines Saved:</strong> 20 lines per query
           </p>
-          <div className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-            Write 44% less code while getting 400% more functionality!
-          </div>
         </div>
       </section>
     </div>

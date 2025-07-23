@@ -151,8 +151,8 @@ export const FullScreenIcon: React.FC<IconProps> = ({
 );
 
 /**
- * Exit fullscreen icon - YouTube-style exit fullscreen icon
- * Corner brackets contracting inward to indicate exiting fullscreen mode
+ * Exit fullscreen icon - Minimize/compress arrows pointing inward
+ * Four arrows pointing toward center to indicate exiting fullscreen mode
  * @param props - Icon properties
  * @returns JSX element for the exit fullscreen icon
  */
@@ -173,7 +173,14 @@ export const ExitFullScreenIcon: React.FC<IconProps> = ({
     strokeLinejoin="round"
     className={className}
   >
-    <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 0-2-2h-3M3 16h3a2 2 0 0 0 2-2v-3" />
+    {/* Top-left arrow pointing inward */}
+    <path d="M4 14h4m0 0V10m0 4l-4-4" />
+    {/* Top-right arrow pointing inward */}
+    <path d="M20 14h-4m0 0V10m0 4l4-4" />
+    {/* Bottom-left arrow pointing inward */}
+    <path d="M4 10h4m0 0v4m0-4l-4 4" />
+    {/* Bottom-right arrow pointing inward */}
+    <path d="M20 10h-4m0 0v4m0-4l4 4" />
   </svg>
 );
 

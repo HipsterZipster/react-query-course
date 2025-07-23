@@ -310,9 +310,6 @@ function MutationsExample(): React.ReactElement {
           <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
             <strong>Lines Saved:</strong> 10-20 lines per mutation operation
           </p>
-          <div className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-            Write 35% less code while getting 200% more functionality!
-          </div>
         </div>
       </section>
     </div>

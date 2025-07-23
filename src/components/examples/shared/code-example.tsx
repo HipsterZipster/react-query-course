@@ -125,6 +125,22 @@ export function CodeExample({
     loadPrism();
   }, []); // Empty dependency array - only run once
 
+  // Effect to handle escape key for fullscreen mode
+  React.useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent): void => {
+      if (event.key === "Escape" && isFullScreen) {
+        setIsFullScreen(false);
+      }
+    };
+
+    if (isFullScreen) {
+      document.addEventListener("keydown", handleEscapeKey);
+      return () => {
+        document.removeEventListener("keydown", handleEscapeKey);
+      };
+    }
+  }, [isFullScreen]);
+
   const codePane = (
     <div className="bg-gray-900 rounded-lg flex flex-col h-full border border-cyan-500">
       <div className="flex-shrink-0 p-3 bg-gray-800 rounded-t-lg flex justify-between items-center border-b border-cyan-500">
@@ -144,13 +160,15 @@ export function CodeExample({
           ))}
         </div>
         <div className="flex items-center space-x-2">
-          <button
-            onClick={toggleExample}
-            className="p-1 text-cyan-300 hover:text-cyan-100 hover:bg-gray-700 rounded-full"
-            title={showCode ? "Expand Code" : "Collapse Code"}
-          >
-            {showCode ? <ExpandContentIcon /> : <CollapseContentIcon />}
-          </button>
+          {!isFullScreen && (
+            <button
+              onClick={toggleExample}
+              className="p-1 text-cyan-300 hover:text-cyan-100 hover:bg-gray-700 rounded-full"
+              title={showCode ? "Expand Code" : "Collapse Code"}
+            >
+              {showCode ? <ExpandContentIcon /> : <CollapseContentIcon />}
+            </button>
+          )}
           <button
             onClick={() => setIsFullScreen(!isFullScreen)}
             className="p-1 text-cyan-300 hover:text-cyan-100 hover:bg-gray-700 rounded-full"
