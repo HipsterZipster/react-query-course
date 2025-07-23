@@ -103,88 +103,18 @@ function SuspenseExample(): React.ReactElement {
             description="Suspense helps avoid jarring UI updates by waiting for all necessary data before rendering the next screen."
           />
         </div>
-      </section>
 
-      <section className="bg-white p-6 border rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">Key Benefits of Suspense</h2>
-
-        <div className="space-y-4">
-          <BenefitItem
-            title="Declarative Loading States"
-            description="Define loading UI at the boundary level instead of in each component."
-          />
-
-          <BenefitItem
-            title="Simplified Component Logic"
-            description="Components can focus on rendering data without handling loading states."
-          />
-
-          <BenefitItem
-            title="Coordinated Loading States"
-            description="Multiple components can load data in parallel with a single loading state."
-          />
-
-          <BenefitItem
-            title="Progressive Loading"
-            description="Nest Suspense boundaries to create progressive loading experiences."
-          />
-        </div>
-      </section>
-
-      <section className="bg-white p-6 border rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">Implementation Example</h2>
-
-        <div className="bg-gray-800 text-white p-4 rounded overflow-x-auto mb-4">
-          <pre>
-            {`// Import necessary components
-import { Suspense } from 'react'
-import { useSuspenseQuery } from '@tanstack/react-query'
-
-// Wrap your component with Suspense
-function ParentComponent() {
-  return (
-    <Suspense fallback={<LoadingUI />}>
-      <DataComponent />
-    </Suspense>
-  )
-}
-
-// Use suspense query in your component
-function DataComponent() {
-  // This will suspend the component until data is available
-  const { data } = useSuspenseQuery({
-    queryKey: ['posts'],
-    queryFn: fetchPosts,
-  })
-  
-  // No need for loading state!
-  return (
-    <div>
-      {data.map(post => (
-        <div key={post.id}>{post.title}</div>
-      ))}
-    </div>
-  )
-}`}
-          </pre>
-        </div>
-
-        <div className="p-4 bg-blue-50 rounded">
-          <p className="font-medium">When to Use Suspense vs. Traditional</p>
-          <div className="mt-2 space-y-2 text-sm">
-            {/* Suspense use cases */}
-            <p>
-              <strong>Use Suspense when:</strong> You want cleaner component
-              code, coordinated loading states, or progressive loading
-              experiences.
-            </p>
-            {/* Traditional useQuery use cases */}
-            <p>
-              <strong>Use Traditional useQuery when:</strong> You need more
-              granular control over loading states, or when you're working with
-              older React versions.
-            </p>
-          </div>
+        <p className="font-medium">When to Use Suspense vs. Traditional</p>
+        <div className="mt-2 space-y-2 text-sm">
+          <p>
+            <strong>Use Suspense when:</strong> You want cleaner component code,
+            coordinated loading states, or progressive loading experiences.
+          </p>
+          <p>
+            <strong>Use Traditional useQuery when:</strong> You need more
+            granular control over loading states, or when you're working with
+            older React versions.
+          </p>
         </div>
       </section>
     </div>

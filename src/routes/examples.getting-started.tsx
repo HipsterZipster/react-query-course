@@ -50,12 +50,19 @@ const queryClient = new QueryClient({
 })`}
           </CodeBlock>
 
-          <p className="mt-2 bg-blue-50 p-3 rounded">
-            <strong>Analogy:</strong> This is similar to creating an{" "}
-            <code>EntityManagerFactory</code> or configuring a connection pool
-            in a Java application. It's the central configuration point for all
-            your queries.
-          </p>
+          <div className="mt-2 space-y-2">
+            <p className="bg-blue-50 p-3 rounded">
+              <strong>Java Analogy:</strong> This is similar to creating an{" "}
+              <code>EntityManagerFactory</code> or configuring a connection pool
+              in a Java application. It's the central configuration point for all
+              your queries.
+            </p>
+            <p className="bg-red-50 p-3 rounded">
+              <strong>Angular Analogy:</strong> Like configuring HttpClient with
+              interceptors in your app module, setting up global HTTP behavior
+              and caching strategies.
+            </p>
+          </div>
         </div>
 
         <div className="mb-6">
@@ -74,11 +81,18 @@ function App() {
 }`}
           </CodeBlock>
 
-          <p className="mt-2 bg-blue-50 p-3 rounded">
-            <strong>Analogy:</strong> This is like setting up a persistence
-            context in a Java EE application, making the EntityManager available
-            to all components.
-          </p>
+          <div className="mt-2 space-y-2">
+            <p className="bg-blue-50 p-3 rounded">
+              <strong>Java Analogy:</strong> This is like setting up a persistence
+              context in a Java EE application, making the EntityManager available
+              to all components.
+            </p>
+            <p className="bg-red-50 p-3 rounded">
+              <strong>Angular Analogy:</strong> Like providing HttpClient in your
+              root module, making it available throughout your component tree
+              via dependency injection.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -92,6 +106,7 @@ function App() {
             description="Time in milliseconds that data remains 'fresh'. After this time, it's considered stale and may trigger a refetch."
             defaultValue="0"
             javaAnalogy="Think of this like a cache expiration policy in a Java caching framework like Caffeine or EhCache."
+            angularAnalogy="Like setting maxAge in Angular's HTTP interceptor caching or using shareReplay with a buffer time."
           />
 
           <ConfigOption
@@ -100,6 +115,7 @@ function App() {
             description="Time in milliseconds that unused/inactive cache data remains in memory before it's garbage collected."
             defaultValue="5 * 60 * 1000 (5 minutes)"
             javaAnalogy="Similar to setting timeToLive for cached objects in Java."
+            angularAnalogy="Like configuring memory cleanup in Angular services or using takeUntil for subscription management."
           />
 
           <ConfigOption
@@ -108,6 +124,7 @@ function App() {
             description="If true, failed queries will retry infinitely. If false, they won't retry. If a number, they'll retry that many times."
             defaultValue="3"
             javaAnalogy="Like configuring retry logic in a resilience4j or Spring Retry configuration."
+            angularAnalogy="Like using Angular's HttpClient with retry operators (retryWhen, retry) from RxJS."
           />
 
           <ConfigOption
@@ -116,6 +133,7 @@ function App() {
             description="If true, queries will refetch when their window is refocused."
             defaultValue="true"
             javaAnalogy="There's no direct Java equivalent, but conceptually similar to cache invalidation strategies."
+            angularAnalogy="Like using Angular's @HostListener to detect window focus and trigger data refresh."
           />
         </div>
       </section>
@@ -170,10 +188,11 @@ interface ConfigOptionProps {
   readonly description: string;
   readonly defaultValue: string;
   readonly javaAnalogy: string;
+  readonly angularAnalogy: string;
 }
 
 /**
- * Renders a configuration option with description and Analogy
+ * Renders a configuration option with description and Analogies
  */
 function ConfigOption({
   name,
@@ -181,6 +200,7 @@ function ConfigOption({
   description,
   defaultValue,
   javaAnalogy,
+  angularAnalogy,
 }: ConfigOptionProps): React.ReactElement {
   return (
     <div className="border rounded p-4">
@@ -192,9 +212,14 @@ function ConfigOption({
       <p className="text-sm text-gray-600">
         Default: <code className="bg-gray-100 px-1">{defaultValue}</code>
       </p>
-      <p className="mt-2 text-sm bg-blue-50 p-2 rounded">
-        <strong>Analogy:</strong> {javaAnalogy}
-      </p>
+      <div className="mt-2 space-y-2">
+        <p className="text-sm bg-blue-50 p-2 rounded">
+          <strong>Java Analogy:</strong> {javaAnalogy}
+        </p>
+        <p className="text-sm bg-red-50 p-2 rounded">
+          <strong>Angular Analogy:</strong> {angularAnalogy}
+        </p>
+      </div>
     </div>
   );
 }

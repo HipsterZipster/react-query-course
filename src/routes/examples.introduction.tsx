@@ -42,15 +42,23 @@ function IntroductionExample(): React.ReactElement {
         </h2>
         <p className="mb-4">
           React Query provides a powerful abstraction for managing server state,
-          similar to how Hibernate/JPA abstracts database interactions in Java.
+          similar to how Hibernate/JPA abstracts database interactions in Java
+          or how Angular's HttpClient with interceptors manages HTTP requests.
           It handles caching, loading states, and errors for you.
         </p>
-        <p className="mb-4 bg-blue-50 p-3 rounded">
-          <strong>Analogy:</strong> Think of React Query as a state management
-          framework similar to JPA/Hibernate in Java. It provides a caching
-          layer, handles the lifecycle of data fetching, and abstracts away much
-          of the boilerplate code.
-        </p>
+        <div className="mb-4 space-y-2">
+          <p className="bg-blue-50 p-3 rounded">
+            <strong>Java Analogy:</strong> Think of React Query as a state management
+            framework similar to JPA/Hibernate in Java. It provides a caching
+            layer, handles the lifecycle of data fetching, and abstracts away much
+            of the boilerplate code.
+          </p>
+          <p className="bg-red-50 p-3 rounded">
+            <strong>Angular Analogy:</strong> Like Angular's HttpClient combined with
+            RxJS operators (shareReplay, retry, catchError) and state management,
+            but with automatic caching and background updates built-in.
+          </p>
+        </div>
         <p>We'll look at a React Query implementation in the next example.</p>
       </section>
 
@@ -62,7 +70,7 @@ function IntroductionExample(): React.ReactElement {
           <li>Automatic background refetching</li>
           <li>Pagination & infinite scrolling support</li>
           <li>Optimistic updates</li>
-          <li>TypeScript integration (similar to strong typing in Java)</li>
+          <li>TypeScript integration (similar to strong typing in Java and Angular)</li>
         </ul>
       </section>
     </div>

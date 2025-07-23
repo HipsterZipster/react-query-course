@@ -171,9 +171,9 @@ function AdvancedQueriesExample(): React.ReactElement {
       >
         <div className="space-y-4">
           <p className="text-gray-600">
-            Similar to passing arguments to your DAO methods in Java, React
-            Query allows you to create dynamic queries by including parameters
-            in the queryKey.
+            Similar to passing arguments to your DAO methods in Java or service
+            methods in Angular, React Query allows you to create dynamic queries
+            by including parameters in the queryKey.
           </p>
           <DynamicQueryReact />
         </div>
@@ -487,13 +487,6 @@ function AdvancedQueriesExample(): React.ReactElement {
                   <li>• DevTools for debugging and monitoring</li>
                 </ul>
               </div>
-            </div>
-
-            <div className="mt-6 p-4 bg-white dark:bg-gray-800 rounded-lg">
-              <p className="text-center text-lg font-semibold text-gray-900 dark:text-white">
-                🎯 <strong>Result:</strong> Write 70% less code while getting
-                300% more functionality!
-              </p>
             </div>
           </div>
         </div>

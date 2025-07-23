@@ -61,10 +61,16 @@ function BasicQueryExample(): React.ReactElement {
                 A unique identifier for your data. Similar to a primary key in a
                 database or a key in a HashMap.
               </p>
-              <p className="mt-1 text-xs bg-blue-100 p-2 rounded">
-                <strong>Analogy:</strong> Like a unique identifier in a Java Map
-                or database primary key.
-              </p>
+              <div className="mt-1 space-y-1">
+                <p className="text-xs bg-blue-100 p-2 rounded">
+                  <strong>Java Analogy:</strong> Like a unique identifier in a Java Map
+                  or database primary key.
+                </p>
+                <p className="text-xs bg-red-100 p-2 rounded">
+                  <strong>Angular Analogy:</strong> Like a trackBy function key in Angular's *ngFor
+                  or a route parameter identifier.
+                </p>
+              </div>
             </div>
 
             <div className="p-4 border-l-4 border-green-500 bg-green-50">
@@ -143,36 +149,42 @@ function BasicQueryExample(): React.ReactElement {
             name="data"
             description="The successful response payload from your API."
             javaAnalogy="Like the entity objects returned from a JPA repository method."
+            angularAnalogy="Like the response data from an Angular HttpClient observable."
           />
 
           <QueryResultItem
             name="isPending"
             description="Boolean indicating if the query is in a loading state."
             javaAnalogy="Like checking if a Future or CompletableFuture is done in Java."
+            angularAnalogy="Like using a loading flag with Angular's async pipe or subscription."
           />
 
           <QueryResultItem
             name="isError"
             description="Boolean indicating if the query encountered an error."
             javaAnalogy="Similar to catching exceptions in a try-catch block."
+            angularAnalogy="Like handling errors in an Angular HttpClient catchError operator."
           />
 
           <QueryResultItem
             name="error"
             description="The error object thrown by queryFn if the query failed."
             javaAnalogy="Like the Exception object in a Java catch block."
+            angularAnalogy="Like the HttpErrorResponse object in Angular's error handling."
           />
 
           <QueryResultItem
             name="refetch"
             description="Function to manually trigger a refetch of the query data."
             javaAnalogy="Like explicitly calling a refresh method on a data source in Java."
+            angularAnalogy="Like manually calling a service method to reload data in Angular."
           />
 
           <QueryResultItem
             name="isFetching"
             description="Boolean indicating if the query is currently fetching data (including background refetching)."
             javaAnalogy="Similar to checking if a background task is running in Java."
+            angularAnalogy="Like tracking HTTP request state with Angular's loading interceptors."
           />
         </div>
       </section>
@@ -381,23 +393,30 @@ interface QueryResultItemProps {
   readonly name: string;
   readonly description: string;
   readonly javaAnalogy: string;
+  readonly angularAnalogy: string;
 }
 
 /**
- * Component to display a single query result property with description and Analogy
+ * Component to display a single query result property with description and Analogies
  */
 function QueryResultItem({
   name,
   description,
   javaAnalogy,
+  angularAnalogy,
 }: QueryResultItemProps): React.ReactElement {
   return (
     <div className="border rounded p-4">
       <code className="bg-gray-100 px-1 font-medium">{name}</code>
       <p className="text-sm mt-1">{description}</p>
-      <p className="mt-2 text-xs bg-blue-50 p-2 rounded">
-        <strong>Analogy:</strong> {javaAnalogy}
-      </p>
+      <div className="mt-2 space-y-2">
+        <p className="text-xs bg-blue-50 p-2 rounded">
+          <strong>Java Analogy:</strong> {javaAnalogy}
+        </p>
+        <p className="text-xs bg-red-50 p-2 rounded">
+          <strong>Angular Analogy:</strong> {angularAnalogy}
+        </p>
+      </div>
     </div>
   );
 }

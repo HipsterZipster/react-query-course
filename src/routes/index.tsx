@@ -54,15 +54,15 @@ function HomePage(): React.ReactElement {
       <header>
         <h1 className="text-4xl font-bold mb-2">React Query Course</h1>
         <p className="text-xl text-gray-600">
-          From Java Beans to React Hooks: A developer's guide to modern data fetching
+          From Java & Angular to React Hooks: A developer's guide to modern data fetching
         </p>
       </header>
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Course Examples</h2>
         <p className="text-gray-600">
-          This course is designed for Java developers transitioning to React. Each example
-          includes Java analogies to help bridge the mental model gap.
+          This course is designed for Java and Angular developers transitioning to React. Each example
+          includes Java and Angular analogies to help bridge the mental model gap.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
