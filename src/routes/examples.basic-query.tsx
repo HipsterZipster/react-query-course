@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { api, useErrorToggle } from "~/api/mock-api";
 import { CodeExample } from "~/components/examples/shared/code-example";
+import { CodeComparison } from "~/components/examples/shared/code-comparison";
 import {
   userListAngularCode,
   userListReactQueryCode,
@@ -208,7 +209,95 @@ function BasicQueryExample(): React.ReactElement {
           />
         </div>
       </section>
+
+      {/* Code Comparison Section */}
+      <section className="bg-white p-6 border rounded-lg">
+        <h2 className="text-xl font-semibold mb-4">📋 Code Comparison</h2>
+        <p className="text-gray-600 mb-4">
+          See the difference between React Query and manual data fetching
+          approaches:
+        </p>
+        <BasicQueryCodeComparison />
+      </section>
+
+      {/* Basic Query Code Reduction Analysis */}
+      <section className="bg-gradient-to-br from-green-50 to-blue-100 dark:from-green-900/20 dark:to-blue-900/20 p-8 rounded-xl border border-green-200 dark:border-green-800">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+          📊 Basic Query Code Reduction Analysis
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
+          {/* Vanilla React Analysis */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-red-200 dark:border-red-700">
+            <h3 className="text-lg font-semibold text-red-800 dark:text-red-200 mb-4">
+              ❌ Vanilla React Approach
+            </h3>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600 dark:text-gray-400">
+                  Total Lines:
+                </span>
+                <span className="font-bold text-red-600">45 lines</span>
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                <div>• 8 lines: Manual state management</div>
+                <div>• 15 lines: useEffect with error handling</div>
+                <div>• 12 lines: Loading and error UI</div>
+                <div>• 10 lines: Success state rendering</div>
+              </div>
+            </div>
+          </div>
+
+          {/* React Query Analysis */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-green-200 dark:border-green-700">
+            <h3 className="text-lg font-semibold text-green-800 dark:text-green-200 mb-4">
+              ✅ React Query Approach
+            </h3>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600 dark:text-gray-400">
+                  Total Lines:
+                </span>
+                <span className="font-bold text-green-600">25 lines</span>
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                <div>• 3 lines: useQuery hook setup</div>
+                <div>• 6 lines: Loading and error UI</div>
+                <div>• 16 lines: Success state rendering</div>
+                <div>• 0 lines: Manual state management!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 p-6 rounded-lg border border-green-200 dark:border-green-700">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            🎯 Basic Query Impact
+          </h3>
+          <p className="text-lg text-gray-700 dark:text-gray-300 mb-2">
+            <strong>Code Reduction:</strong> 44% less code to write
+          </p>
+          <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+            <strong>Lines Saved:</strong> 20 lines per query
+          </p>
+          <div className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+            Write 44% less code while getting 400% more functionality!
+          </div>
+        </div>
+      </section>
     </div>
+  );
+}
+
+function BasicQueryCodeComparison() {
+  return (
+    <CodeComparison
+      title="Compare Basic Query Implementation"
+      beforeCode={userListVanillaCode}
+      afterCode={userListReactQueryCode}
+      beforeTitle="❌ Vanilla React (45 lines)"
+      afterTitle="✅ React Query (25 lines)"
+    />
   );
 }
 
