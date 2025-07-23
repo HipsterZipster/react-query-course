@@ -1,1 +1,0 @@
-import{j as s,O as t}from"./main--bdn4Fkz.js";const e=function(){return s.jsxs("div",{className:"p-2",children:[s.jsx("div",{children:"I'm a pathless layout"}),s.jsx("div",{children:s.jsx(t,{})})]})};export{e as component};
